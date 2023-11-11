@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="~{fragments/common::head}"></head>
+
+<body id="adminPage">
+<div id="admin-generator" th:object="${userForAdminPanelDTO}"></div>
+
+<script src="/js/admin-generator.js"></script>
+
+</body>
+</html>

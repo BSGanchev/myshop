@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="~{fragments/common::head}"></head>
+
+<body>
+    <div class="container ">
+        <nav th:insert="~{fragments/common::nav}"></nav>
+        <div class="container mt-lg-5 border-right border-bottom bg-transparent h-100">
+            <h1 class="w-100 text-light text-right">Register</h1>
+        </div>
+        <div class="row tm-mt-big">
+            <div class="col-12 mx-auto tm-login-col">
+                <div class="bg-white tm-block">
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <form th:action="@{/users/register}" method="POST" class="tm-login-form">
+                                <div class="input-group">
+                                    <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
+                                    <input name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                           id="username" placeholder="Enter username">
+									<div class="mx-auto">
+										<small class="text-danger">Username must be between 2 and 10 characters</small>
+									</div>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
+                                    <input name="password" type="password" class="form-control validate"
+                                           id="password" placeholder="Enter password">
+									<div class="mx-auto">
+										<small class="text-danger">Password must be betweeen 3 and 10 characters</small>
+									</div>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <label for="confirmPassword" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Confirm Password</label>
+                                    <input name="confirmPassword" type="password" class="form-control validate" id="confirmPassword" placeholder="Confirm password" >
+                                </div>
+                                <div class="input-group mt-3">
+                                    <label for="email" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Email</label>
+                                    <input name="email" type="email" class="form-control validate" id="email" placeholder="Enter email">
+									<div class="mx-auto">
+										<small class="text-danger">Enter valid email address</small>
+									</div>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <label for="git" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Git</label>
+                                    <input name="git" type="text" class="form-control validate" id="git" placeholder="Enter git">
+									<div class="mx-auto text-center align-content-center">
+										<small class="text-danger" >Enter git address following this pattern </small>
+									</div>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <button type="submit" class="btn btn-primary d-inline-block mx-auto">Register</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+    </div>
+		<footer class="row">
+        <div class="col-12 container-fluid text-right font-weight-light">
+            <p class="d-inline-block tm-bg-black text-white py-2 px-4">
+                &copy; Spring Team 2020
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
