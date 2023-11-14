@@ -22,4 +22,11 @@ public class Role extends BaseEntity{
     public void setRole(RoleNameEnum role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "role=" + role +
+                '}';
+    }
 }

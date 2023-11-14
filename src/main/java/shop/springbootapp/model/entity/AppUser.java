@@ -22,6 +22,9 @@ public class AppUser extends BaseEntity {
     private String country;
     private String city;
     private String address;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:s")
+    private LocalDateTime registered;
     @Email
     @NotBlank
     @Column(unique = true)
@@ -120,5 +123,21 @@ public class AppUser extends BaseEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public LocalDateTime getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(LocalDateTime registered) {
+        this.registered = registered;
+    }
+
+    public LocalDateTime getLastLogged() {
+        return lastLogged;
+    }
+
+    public void setLastLogged(LocalDateTime lastLogged) {
+        this.lastLogged = lastLogged;
     }
 }

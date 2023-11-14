@@ -90,3 +90,42 @@ input {
     align-items: inherit;
     text-align: justify-all;
 }
+.active-users {
+    align-items: inherit;
+}
+.last-logged-user, .last-logged-user-column {
+    margin-top: 10%;
+    width: 35%;
+    background: none;
+    padding: 2%;
+    border: 5px solid black;
+    border-radius: 5%;
+    box-shadow: 10px 10px 20px 5px gray;
+    text-align: center;
+    position: center;
+}
+.product-image {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100px;
+    height: 100px;
+}
+
+.product-image:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+table, th, td {
+
+    align-self: center;
+    position: center;
+    border: 1px solid;
+}
+.products-list {
+    margin-top: 10%;
+    text-align: center;
+    image-orientation: from-image;
+    width: 35%;
+    position: center;
+
+}

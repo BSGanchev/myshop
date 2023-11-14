@@ -1,6 +1,5 @@
 package shop.springbootapp.service.impl;
 
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import shop.springbootapp.model.entity.Role;
 import shop.springbootapp.model.enums.RoleNameEnum;
@@ -9,10 +8,7 @@ import shop.springbootapp.service.RoleService;
 
 import java.util.Arrays;
 
-import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
-
 @Service
-
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 

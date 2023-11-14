@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 
 <head th:insert="~{fragments/common::head}"></head>
 
@@ -17,7 +17,7 @@
                 <div class="bg-white tm-block">
                     <div class="row mt-2">
                         <div class="col-12">
-                            <form th:action="@{/users/register}" method="POST" class="tm-login-form">
+                            <form th:action="@{/users/register}" th:method="POST" th:object="${registerUserDTO}" class="tm-login-form">
                                 <div class="input-group">
                                     <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
                                     <input name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
@@ -46,8 +46,8 @@
 									</div>
                                 </div>
                                 <div class="input-group mt-3">
-                                    <label for="git" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Git</label>
-                                    <input name="git" type="text" class="form-control validate" id="git" placeholder="Enter git">
+                                    <label for="phoneNumber" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Git</label>
+                                    <input name="phoneNumber" type="text" class="form-control validate" id="phoneNumber" placeholder="Enter phone number">
 									<div class="mx-auto text-center align-content-center">
 										<small class="text-danger" >Enter git address following this pattern </small>
 									</div>

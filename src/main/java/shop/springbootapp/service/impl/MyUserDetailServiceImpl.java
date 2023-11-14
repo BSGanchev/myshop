@@ -6,16 +6,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import shop.springbootapp.model.entity.Role;
 import shop.springbootapp.model.entity.AppUser;
+import shop.springbootapp.model.entity.Role;
 import shop.springbootapp.repository.UserRepository;
 
 import java.util.stream.Collectors;
 
-public class UserDetailServiceImpl implements UserDetailsService {
+public class MyUserDetailServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public UserDetailServiceImpl(UserRepository userRepository) {
+    public MyUserDetailServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -35,5 +35,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     }
     private GrantedAuthority map(Role role) {
         return new SimpleGrantedAuthority("ROLE_" + role.getRole().name());
+
     }
 }

@@ -34,7 +34,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <th:block sec:authorize="hasRole('OWNER')">
-                        <a class="nav-link" th:href="@{/menager}">
+                        <a class="nav-link" th:href="@{/owner}">
                             <div class="nav-item text-center">Hello
                                 <th:block sec:authentication='name'></th:block>
                             </div>

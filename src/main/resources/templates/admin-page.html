@@ -2,14 +2,44 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 
 <head th:insert="~{fragments/common::head}"></head>
 
 <body id="adminPage">
-<div id="admin-generator" th:object="${userForAdminPanelDTO}"></div>
+<nav th:insert="~{fragments/common::nav}"></nav>
 
-<script src="/js/admin-generator.js"></script>
+<div class="container">
+    <h2 th:text="|Currently logged in users ${activeUsersCount}|"></h2>
+</div>
+<table class="last-logged-user">
+    <thead>
+    <td class="last-logged-user-column">Username</td>
+    <td class="last-logged-user-column">Role</td>
+    <td class="last-logged-user-column">login date</td>
+    <td class="last-logged-user-column">Edit</td>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${lastLoggedUsers}">
+        <td class="last-logged-user-column" th:text="${user.username}"></td>
+        <td class="last-logged-user-column">
+            <a th:each="userrole : ${user.roles}" th:text="${userrole.role.name().toLowerCase()}">[Role]</a>
+        </td>
+        <td class="last-logged-user-column" th:utext="${user.lastLogged}"></td>
+        <td class="last-logged-user-column">
+            <a th:href="@{/admin/edit/{id}(id=${user.id})}">edit</a>
+        </td>
 
+    </tr>
+    </tbody>
+</table>
+<footer class="row">
+    <div class="col-12 container-fluid text-right font-weight-light">
+        <p class="d-inline-block tm-bg-black text-white py-2 px-4">
+            &copy; Spring Team 2020
+        </p>
+
+    </div>
+</footer>
 </body>
 </html>
