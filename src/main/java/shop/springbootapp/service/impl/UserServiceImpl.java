@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.model.service.UserServiceModel;
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
         user1.getRoles().add(this.roleRepository.findByRole(RoleNameEnum.OWNER).orElse(null));
         this.userRepository.save(user1);
     }
-
+    @Transactional
     @Override
     public void changeLastLoginTime(String name) {
         this.userRepository.setLastLoginTime(name);

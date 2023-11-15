@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                         .logoutUrl("/users/logout")
                         .logoutSuccessUrl("/")
                         .logoutSuccessHandler(myLogoutSuccessHandler())
-                        .deleteCookies("SESSIONID")
+                        .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
 
                 //TODO: remember me!

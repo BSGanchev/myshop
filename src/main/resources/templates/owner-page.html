@@ -14,6 +14,8 @@
     <td class="table-header">Type</td>
     <td class="table-header">Picture</td>
     <td class="table-header">Description</td>
+    <td class="table-header">Price</td>
+    <td class="table-header">Edit</td>
     </thead>
     <tbody>
     <tr th:each="product : ${products}">
@@ -23,6 +25,10 @@
             <img class="product-image card-img" th:src="${product.pictureUrl}">
         </td>
         <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+        <td>
+            <a th:href="@{/owner/edit/{id}(id=${product.id})}">edit</a>
+        </td>
     </tr>
     </tbody>
 </table>

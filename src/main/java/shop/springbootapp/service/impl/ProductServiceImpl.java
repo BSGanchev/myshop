@@ -22,6 +22,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void initProducts() {
+        if (this.productRepository.count() != 0) {
+            return;
+        }
         Product product = new Product();
         product.setProductName("Purple Baby Frame");
         product.setPrice(BigDecimal.valueOf(12.99));
