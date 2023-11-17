@@ -19,7 +19,6 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
                                         Authentication authentication) throws IOException, ServletException {
 
         userService.changeLastLoginTime(authentication.getName());
-
         setDefaultTargetUrl("/");
         super.onAuthenticationSuccess(request, response, authentication);
     }

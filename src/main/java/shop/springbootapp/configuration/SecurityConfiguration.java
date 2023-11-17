@@ -41,8 +41,6 @@ public class SecurityConfiguration {
                         .logoutSuccessHandler(myLogoutSuccessHandler())
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
-
-                //TODO: remember me!
         ).sessionManagement(
             httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
                     .maximumSessions(1)
