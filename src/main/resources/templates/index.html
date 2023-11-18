@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Piece of Beauty home page</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/index.css">
@@ -29,7 +29,9 @@
         <div class="icons">
             <a href="#" class="fas fa-heart"></a>
             <a href="#" class="fas fa-shopping-cart"></a>
-            <a href="#" class="fas fa-user"></a>
+            <th:block sec:authorize="!isAuthenticated()">
+                <a th:href="@{/users/login}" class="fas fa-user"></a>
+            </th:block>
         </div>
     </header>
     <!-- home section -->
@@ -190,8 +192,13 @@
                 <div class="box">
                     <h3>quick links</h3>
                     <a href="#">home</a>
-                    <a href="#">my account</a>
-                    <a href="#">my oreder</a>
+                        <th:block sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/users/login}">my account</a>
+                        </th:block>
+                        <th:block>
+                            <a th:href="@{/my-order}">my account</a>
+                        </th:block>
+                    <a href="#">my order</a>
                     <a href="#">favorite</a>
                     <a href="#">contact</a>
                 </div>

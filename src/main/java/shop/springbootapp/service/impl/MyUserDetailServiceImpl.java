@@ -20,10 +20,10 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return this.userRepository.findByEmail(email)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.userRepository.findByUsername(username)
                 .map(this::map)
-                .orElseThrow(() -> new UsernameNotFoundException("User with email" + email + " not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with username" + username + " not found!"));
     }
 
     private UserDetails map(AppUser appUser) {

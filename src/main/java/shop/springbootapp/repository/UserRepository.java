@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<AppUser, UUID> {
 
-    Optional<AppUser> findByEmail(String email);
+    Optional<AppUser> findByUsername(String username);
     @Modifying
     @Transactional
     @Query("update AppUser u set u.lastLogged = now() where u.username = ?1")
