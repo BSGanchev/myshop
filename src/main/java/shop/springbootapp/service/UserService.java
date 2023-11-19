@@ -15,5 +15,5 @@ public interface UserService {
 
     List<AppUser> getLastLoggedUsers();
 
-    AppUser registerUser(UserServiceModel userServiceModel);
+    void registerUser(UserServiceModel userServiceModel);
 }

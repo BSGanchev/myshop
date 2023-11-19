@@ -41,6 +41,8 @@ public class AppUser extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastLogged;
 
+    private boolean isEnabled;
+
     public AppUser() {
         this.roles = new HashSet<>();
     }
@@ -139,5 +141,13 @@ public class AppUser extends BaseEntity {
 
     public void setLastLogged(LocalDateTime lastLogged) {
         this.lastLogged = lastLogged;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }

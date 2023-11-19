@@ -1,12 +1,14 @@
 package shop.springbootapp.service.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.enums.RoleNameEnum;
+import shop.springbootapp.model.events.RegistrationEvent;
 import shop.springbootapp.model.service.UserServiceModel;
 import shop.springbootapp.repository.RoleRepository;
 import shop.springbootapp.repository.UserRepository;
@@ -21,14 +23,16 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final SessionRegistry sessionRegistry;
     private final ModelMapper modelMapper;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, SessionRegistry sessionRegistry, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, SessionRegistry sessionRegistry, ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.sessionRegistry = sessionRegistry;
         this.modelMapper = modelMapper;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Override
@@ -72,12 +76,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AppUser registerUser(UserServiceModel userServiceModel) {
+    public void registerUser(UserServiceModel userServiceModel) {
 
         userServiceModel.setPassword(passwordEncoder.encode(userServiceModel.getPassword()));
         userServiceModel.getRoles().add(roleRepository.findByRole(RoleNameEnum.USER).orElse(null));
+        userServiceModel.setEnabled(false);
 
-        return this.userRepository
+        this.userRepository
                 .save(modelMapper.map(userServiceModel, AppUser.class));
+
+        applicationEventPublisher
+                .publishEvent(new RegistrationEvent("UserService", userServiceModel.getEmail()));
+
     }
 }

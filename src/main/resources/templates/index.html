@@ -13,209 +13,220 @@
 
 <body>
 
-    <header>
-        <input type="checkbox" name="" id="toggler">
-        <label for="toggler" class="fas fa-bars"></label>
+<header>
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
 
-        <a href="#" class="logo">Piece of Beauty<span>.</span></a>
-        <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#products">Products</a>
-            <a href="#review">Review</a>
-            <a href="#contact">Contact</a>
-        </nav>
+    <a href="#" class="logo">Piece of Beauty<span>.</span></a>
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#review">Review</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-        <div class="icons">
-            <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <th:block sec:authorize="!isAuthenticated()">
-                <a th:href="@{/users/login}" class="fas fa-user"></a>
-            </th:block>
+    <div class="icons">
+        <a>Hello<th:block sec:authorize="isAuthenticated()">
+            <th:block sec:authentication='name'></th:block>
+        </th:block>
+        </a>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+        <th:block sec:authorize="!isAuthenticated()">
+            <a th:href="@{/users/login}" class="fas fa-sign-in"></a>
+        </th:block>
+        <th:block sec:authorize="isAuthenticated()">
+        <form th:action="@{/users/logout}" th:method="POST">
+            <button type="submit" class="fas fa-sign-out"></button>
+        </form>
+        </th:block>
+    </div>
+</header>
+<!-- home section -->
+<section class="home" id="home">
+    <div class="content">
+        <h3>all kind of beautiful things</h3>
+        <span> hand made beauties </span>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores earum iure maiores. Culpa rem maxime
+            iusto repellendus sapiente accusantium labore?</p>
+        <a href="#" class="btn">shop now</a>
+    </div>
+</section>
+<!-- about section -->
+<section class="about" id="about">
+    <h1 class="heading">
+        <span> About </span> us
+    </h1>
+    <div class="row">
+        <div class="video-container">
+            <video src="/images/about-us.mp4" loop autoplay muted></video>
+            <h3>photo album for baby girl</h3>
         </div>
-    </header>
-    <!-- home section -->
-    <section class="home" id="home">
         <div class="content">
-            <h3>all kind of beautiful things</h3>
-            <span> hand made beauties </span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores earum iure maiores. Culpa rem maxime
-                iusto repellendus sapiente accusantium labore?</p>
-            <a href="#" class="btn">shop now</a>
+            <h3>why chose us?</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit id libero aspernatur nihil,
+                obcaecati ad laboriosam laudantium aperiam laborum dicta.</p>
+            <a href="#" class="btn">learn more</a>
         </div>
-    </section>
-    <!-- about section -->
-    <section class="about" id="about">
-        <h1 class="heading">
-            <span> About </span> us
-        </h1>
-        <div class="row">
-            <div class="video-container">
-                <video src="/images/about-us.mp4" loop autoplay muted></video>
-                <h3>photo album for baby girl</h3>
+    </div>
+</section>
+<!-- icons section -->
+<section class="icons-container">
+    <div class="icons">
+        <img src="/images/delivery.png" alt="">
+        <div class="info">
+            <hr>
+            Express delivery</h3>
+            <span>on all orders</span>
+        </div>
+    </div>
+    <div class="icons">
+        <img src="/images/gifts-icon.png" alt="">
+        <div class="info">
+            <hr>
+            Offer & gifts</h3>
+            <span>All the time</span>
+        </div>
+    </div>
+</section>
+<!-- products section -->
+<section class="products" id="products">
+    <h1 class="heading">Products <span>on discount </span></h1>
+    <div class="box-container">
+        <div class="box">
+            <span class="discount">-15%</span>
+            <div class="image">
+                <img src="/images/christmas-ball-discount.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="cart-btn">add to cart</a>
+                    <a href="#" class="fas fa-share"></a>
+                </div>
             </div>
             <div class="content">
-                <h3>why chose us?</h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit id libero aspernatur nihil,
-                    obcaecati ad laboriosam laudantium aperiam laborum dicta.</p>
-                <a href="#" class="btn">learn more</a>
-            </div>
-        </div>
-    </section>
-    <!-- icons section -->
-    <section class="icons-container">
-        <div class="icons">
-            <img src="/images/delivery.png" alt="">
-            <div class="info">
-                <hr>Express delivery</h3>
-                <span>on all orders</span>
-            </div>
-        </div>
-        <div class="icons">
-            <img src="/images/gifts-icon.png" alt="">
-            <div class="info">
-                <hr>Offer & gifts</h3>
-                <span>All the time</span>
-            </div>
-        </div>
-    </section>
-    <!-- products section -->
-    <section class="products" id="products">
-        <h1 class="heading">Products <span>on discount </span></h1>
-        <div class="box-container">
-            <div class="box">
-                <span class="discount">-15%</span>
-                <div class="image">
-                    <img src="/images/christmas-ball-discount.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="cart-btn">add to cart</a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Christmas ball</h3>
-                    <div class="price">BGN 12.99 <span>BGN 15.00</span></div>
-                </div>
-            </div>
-
-            <div class="box">
-                <span class="discount">-15%</span>
-                <div class="image">
-                    <img src="/images/photo-album-discount.jpg" alt="">
-                    <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="cart-btn">add to cart</a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Photo album</h3>
-                    <div class="price">BGN 55.99 <span>BGN 60.00</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- review section -->
-    <section class="review" id="review">
-        <h1 class="heading"> customer's <span>review </span></h1>
-        <div class="box-container">
-            <div class="box">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos laborum, recusandae
-                    necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere dicta debitis
-                    voluptate natus nisi commodi.</p>
-                <div class="user">
-                    <img src="/images/user.png" alt="">
-                    <div class="user-info">
-                        <h3>John Doe</h3>
-                        <span>Happy costomer</span>
-                    </div>
-                </div>
-                <span class="fas fa-quote-right"></span>
-            </div>
-            <div class="box">
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos laborum, recusandae
-                    necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere dicta debitis
-                    voluptate natus nisi commodi.</p>
-                <div class="user">
-                    <img src="/images/user.png" alt="">
-                    <div class="user-info">
-                        <h3>John Doe</h3>
-                        <span>Happy costomer</span>
-                    </div>
-                </div>
-                <span class="fas fa-quote-right"></span>
+                <h3>Christmas ball</h3>
+                <div class="price">BGN 12.99 <span>BGN 15.00</span></div>
             </div>
         </div>
 
-        </div>
-
-    </section>
-
-    <section class="contact" id="contact">
-        <h1 class="heading"> Contact <span>us </span></h1>
-        <div class="row">
-
-            <form action="">
-                <label for="name"></label>
-                <input type="text" placeholder="name" class="box" id="name">
-                <label for="email"></label>
-                <input type="email" placeholder="email" class="box" id="email">
-                <label for="number"></label>
-                <input type="number" placeholder="number" class="box" id="number">
-                <label for="message"></label>
-                <textarea name="" class="box" placeholder="message" id="message" cols="30" rows="10"></textarea>
-                <input type="submit" value="send message" class="btn">
-            </form>
+        <div class="box">
+            <span class="discount">-15%</span>
             <div class="image">
-                <img src="/images/contact-us.jpg" alt="">
+                <img src="/images/photo-album-discount.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="cart-btn">add to cart</a>
+                    <a href="#" class="fas fa-share"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3>Photo album</h3>
+                <div class="price">BGN 55.99 <span>BGN 60.00</span></div>
             </div>
         </div>
-    </section>
-    <footer>
-        <section class="footer">
-            <div class="box-container">
-                <div class="box">
-                    <h3>quick links</h3>
-                    <a href="#">home</a>
-                        <th:block sec:authorize="!isAuthenticated()">
-                            <a th:href="@{/users/login}">my account</a>
-                        </th:block>
-                        <th:block>
-                            <a th:href="@{/my-order}">my account</a>
-                        </th:block>
-                    <a href="#">my order</a>
-                    <a href="#">favorite</a>
-                    <a href="#">contact</a>
-                </div>
-                <div class="box">
-                    <h3>contact info</h3>
-                    <a href="https://www.facebook.com/PieceOfYourBeauty">A Piece of Beauty</a>
-                    <a href="#">apieceofbeauty@gmail.com</a>
-                    <a href="#">Varna, Bulgaria, 9000</a>
-                    <div class="delivery-row">
-                    <a href="https://www.econt.com/">Cash on Delivery</a>
-                        <img src="/images/econt-icon.png" alt="">
-                    </div>
+    </div>
+</section>
+<!-- review section -->
+<section class="review" id="review">
+    <h1 class="heading"> customer's <span>review </span></h1>
+    <div class="box-container">
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos laborum, recusandae
+                necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere dicta debitis
+                voluptate natus nisi commodi.</p>
+            <div class="user">
+                <img src="/images/user.png" alt="">
+                <div class="user-info">
+                    <h3>John Doe</h3>
+                    <span>Happy costomer</span>
                 </div>
             </div>
-            <div class="credit">A Piece of<span> Beauty </span> &copy</div>
-        </section>
-    </footer>
+            <span class="fas fa-quote-right"></span>
+        </div>
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos laborum, recusandae
+                necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere dicta debitis
+                voluptate natus nisi commodi.</p>
+            <div class="user">
+                <img src="/images/user.png" alt="">
+                <div class="user-info">
+                    <h3>John Doe</h3>
+                    <span>Happy costomer</span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+    </div>
+
+    </div>
+
+</section>
+
+<section class="contact" id="contact">
+    <h1 class="heading"> Contact <span>us </span></h1>
+    <div class="row">
+
+        <form action="">
+            <label for="name"></label>
+            <input type="text" placeholder="name" class="box" id="name">
+            <label for="email"></label>
+            <input type="email" placeholder="email" class="box" id="email">
+            <label for="number"></label>
+            <input type="number" placeholder="number" class="box" id="number">
+            <label for="message"></label>
+            <textarea name="" class="box" placeholder="message" id="message" cols="30" rows="10"></textarea>
+            <input type="submit" value="send message" class="btn">
+        </form>
+        <div class="image">
+            <img src="/images/contact-us.jpg" alt="">
+        </div>
+    </div>
+</section>
+<footer>
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#">home</a>
+                <th:block sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/users/login}">my account</a>
+                </th:block>
+                <th:block>
+                    <a th:href="@{/my-order}">my account</a>
+                </th:block>
+                <a href="#">my order</a>
+                <a href="#">favorite</a>
+                <a href="#">contact</a>
+            </div>
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="https://www.facebook.com/PieceOfYourBeauty">A Piece of Beauty</a>
+                <a href="#">apieceofbeauty@gmail.com</a>
+                <a href="#">Varna, Bulgaria, 9000</a>
+                <div class="delivery-row">
+                    <a href="https://www.econt.com/">Cash on Delivery</a>
+                    <img src="/images/econt-icon.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="credit">A Piece of<span> Beauty </span> &copy</div>
+    </section>
+</footer>
 </body>
 
 </html>

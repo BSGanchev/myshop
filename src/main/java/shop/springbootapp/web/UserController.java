@@ -40,10 +40,6 @@ public class UserController {
         }
         return "register";
     }
-    @GetMapping("/logout")
-    public String logout(){
-        return "index";
-    }
     @PostMapping("/register")
     public String registerConfirm(@Valid @ModelAttribute("registerUserDTO") RegisterUserDTO registerUserDTO,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -56,9 +52,6 @@ public class UserController {
         }
 
         this.userService.registerUser(modelMapper.map(registerUserDTO, UserServiceModel.class));
-
-
-        System.out.println(LocalDateTime.now());
 
         return "redirect:login";
     }

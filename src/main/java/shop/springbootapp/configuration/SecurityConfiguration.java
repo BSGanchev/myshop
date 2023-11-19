@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.repository.UserRepository;
 import shop.springbootapp.service.impl.MyUserDetailServiceImpl;
@@ -41,10 +43,13 @@ public class SecurityConfiguration {
                         .logoutSuccessHandler(myLogoutSuccessHandler())
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
-        ).sessionManagement(
+        ).
+
+                sessionManagement(
             httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
                     .maximumSessions(1)
                     .sessionRegistry(sessionRegistry()))
+
         .build();
     }
     @Bean

@@ -90,6 +90,11 @@ header .navbar a:hover {
     color: var(--pink);
 
 }
+header .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 header .icons a {
     font-size: 2.5rem;
@@ -99,6 +104,25 @@ header .icons a {
 }
 
 header .icons a:hover {
+    color: var(--pink);
+}
+header .icons form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header .icons form button {
+    font-size: 2.5rem;
+    background-color: transparent;
+    margin-left: 1.5rem;
+    font-weight: bolder;
+    border: none;
+    cursor: pointer;
+    visibility: visible;
+
+}
+header .icons button:hover {
     color: var(--pink);
 }
 

@@ -15,9 +15,9 @@ public class MyLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
                                     Authentication authentication) throws IOException, ServletException {
 
             if (authentication != null) {
-                // do something
+                setDefaultTargetUrl("/");
             }
-            setDefaultTargetUrl("/login");
+            setDefaultTargetUrl("/");
             super.onLogoutSuccess(request, response, authentication);
         }
 

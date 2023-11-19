@@ -1,6 +1,9 @@
 package shop.springbootapp.web;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,5 +38,14 @@ public class AdminController {
         model.addAttribute("lastLoggedUsers", appUserViews );
 
         return "admin-page";
+    }
+    @GetMapping("/api/auth/status")
+    public ResponseEntity<String> getAuthStatus() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            return ResponseEntity.ok("authenticated");
+        } else {
+            return ResponseEntity.ok("not authenticated");
+        }
     }
 }
