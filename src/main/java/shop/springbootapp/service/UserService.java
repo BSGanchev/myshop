@@ -1,13 +1,12 @@
 package shop.springbootapp.service;
 
-import shop.springbootapp.model.dto.RegisterUserDTO;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.service.UserServiceModel;
 
 import java.util.List;
 
 public interface UserService {
-    AppUser findByEmail(String email);
+    AppUser findByUsername(String username);
     void initUser();
     void changeLastLoginTime(String name);
 
