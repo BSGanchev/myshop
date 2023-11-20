@@ -51,6 +51,7 @@ public class UserController {
             return "redirect:register";
         }
 
+
         this.userService.registerUser(modelMapper.map(registerUserDTO, UserServiceModel.class));
 
         return "redirect:login";

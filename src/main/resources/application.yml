@@ -32,9 +32,9 @@ apofb:
     send-emails: true
     host: smtp.mailgun.org
     port: 587
-    username: postmaster@sandbox9378a006e54c425999e310fe3d09c067.mailgun.org
-    password: 3302f14a7b55014f8841d8ce06f4e29f-1c7e8847-7f1366c4
-    from-email: example@axample.com
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    from-email: apofb@axample.com
     from-title: Product Notifier
     transport-protocol: smtp
     smtp-auth: true

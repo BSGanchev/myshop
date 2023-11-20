@@ -82,11 +82,11 @@ public class UserServiceImpl implements UserService {
         userServiceModel.getRoles().add(roleRepository.findByRole(RoleNameEnum.USER).orElse(null));
         userServiceModel.setEnabled(false);
 
-        this.userRepository
-                .save(modelMapper.map(userServiceModel, AppUser.class));
 
         applicationEventPublisher
-                .publishEvent(new RegistrationEvent("UserService", userServiceModel.getEmail()));
+                .publishEvent(new RegistrationEvent("UserService", userServiceModel.getEmail(), userServiceModel.getUsername()));
+        this.userRepository
+                .save(modelMapper.map(userServiceModel, AppUser.class));
 
     }
 }
