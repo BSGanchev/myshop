@@ -34,8 +34,8 @@ apofb:
     port: 587
     username: ${MAIL_USERNAME}
     password: ${MAIL_PASSWORD}
-    from-email: apofb@axample.com
-    from-title: Product Notifier
+    from-email: "bsganchev@abv.bg"
+    from-title: "A Piece of Beauty registration notification"
     transport-protocol: smtp
     smtp-auth: true
     smtp-starttls-enable: true

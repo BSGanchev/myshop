@@ -6,34 +6,34 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailPropertyAccess {
 
-    @Value("${apofb.mail.host:#{null}")
+    @Value("${apofb.mail.host}")
     private String aPofBMailHost;
-    @Value("${apofb.mail.port:#{null}}")
+    @Value("${apofb.mail.port}")
     private Integer aPofBMailPort;
-    @Value("${apofb.mail.username:#{null}}")
+    @Value("${apofb.mail.username}")
     private String aPofBMailUsername;
-    @Value("${apofb.mail.password:#{null}}")
+    @Value("${apofb.mail.password}")
     private String aPofBMailPassword;
-    @Value("${apofb.mail.from-title:#{null}}")
+    @Value("${apofb.mail.from-title}")
     private String aPofBMailFrom;
-    @Value("${apofb.mail.from-email:#{null}}")
+    @Value("${apofb.mail.from-email}")
     private String aPofBMailEmail;
-    @Value("${apofb.mail.transport-protocol:#{null}}")
+    @Value("${apofb.mail.transport-protocol}")
     private String aPofBMailTransportProtocol;
 
-    @Value("${apofb.mail.smtp-auth:#{null}}")
+    @Value("${apofb.mail.smtp-auth}")
     private Boolean aPofBMailSmtpAuth;
 
-    @Value("${apofb.mail.smtp-starttls-enable:#{null}}")
+    @Value("${apofb.mail.smtp-starttls-enable}")
     private Boolean aPofBMailSmtpStarttlsEnable;
 
-    @Value("${apofb.mail.smtp-ssl-enable:#{null}}")
+    @Value("${apofb.mail.smtp-ssl-enable}")
     private Boolean aPofBMailSmtpSslEnable;
 
-    @Value("${apofb.mail.debug:#{false}}")
+    @Value("${apofb.mail.debug}")
     private Boolean aPofBMailDebug;
 
-    @Value("${apofb.mail.send-emails:#{false}}")
+    @Value("${apofb.mail.send-emails}")
     private Boolean aPofBMailSendEmails;
 
     public String getaPofBMailHost() {
