@@ -9,7 +9,9 @@ import java.util.UUID;
 public interface UserActivationService {
 
     void userRegistered(UserRegistrationEvent event) throws MessagingException;
+
     void deleteObsoleteActivationToken();
+
     String createActivationToken(String userEmail);
 
     UUID getUserId(String activationLink);

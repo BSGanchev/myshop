@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.view.AppUserView;
 import shop.springbootapp.service.UserService;
@@ -35,10 +34,11 @@ public class AdminController {
                 .map(appUser -> (modelMapper.map(appUser, AppUserView.class)))
                 .collect(Collectors.toList());
 
-        model.addAttribute("loggedUsers", appUserViews );
+        model.addAttribute("loggedUsers", appUserViews);
 
         return "admin-page";
     }
+
     @GetMapping("/api/auth/status")
     public ResponseEntity<String> getAuthStatus() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

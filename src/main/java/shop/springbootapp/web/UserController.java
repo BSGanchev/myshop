@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,6 @@ import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.service.UserServiceModel;
 import shop.springbootapp.service.UserService;
-
-import java.util.Calendar;
 
 import static org.springframework.validation.BindingResult.MODEL_KEY_PREFIX;
 
@@ -31,23 +28,25 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @GetMapping("/register")
-    public String register(Model model){
+    public String register(Model model) {
         if (!model.containsAttribute("registerUserDTO")) {
             model.addAttribute(new RegisterUserDTO());
         }
         return "register";
     }
+
     @PostMapping("/register")
     public String registerConfirm(@ModelAttribute("registerUserDTO") @Valid RegisterUserDTO registerUserDTO,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                   HttpServletRequest request) {
 
-        if(bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("registerUserDTO",registerUserDTO);
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("registerUserDTO", registerUserDTO);
             redirectAttributes.addFlashAttribute(MODEL_KEY_PREFIX + "registerUserDTO", bindingResult);
 
             return "redirect:register";
@@ -57,10 +56,11 @@ public class UserController {
 
         return "redirect:login";
     }
+
     @GetMapping("/activation")
-    public String registrationConfirm(Model model, @RequestParam("token") String token){
+    public String registrationConfirm(Model model, @RequestParam("token") String token) {
         UserActivationToken activationToken = userService.getActivationToken(token);
-        if(activationToken == null) {
+        if (activationToken == null) {
             return "redirect:register";
         }
         AppUser appUser = activationToken.getUser();

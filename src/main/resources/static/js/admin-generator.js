@@ -1,13 +1,13 @@
 let options = [
-    set0 = ['Option 1','Option 2'],
-    set1 = ['First Option','Second Option','Third Option']
+    set0 = ['Option 1', 'Option 2'],
+    set1 = ['First Option', 'Second Option', 'Third Option']
 ];
 
 function makeUL(array) {
     // Create the list element:
     let list = document.createElement('ul');
 
-    for(let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         // Create the list item:
         let item = document.createElement('li');
 

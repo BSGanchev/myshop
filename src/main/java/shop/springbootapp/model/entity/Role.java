@@ -8,7 +8,7 @@ import shop.springbootapp.model.enums.RoleNameEnum;
 
 @Entity
 @Table(name = "roles")
-public class Role extends BaseEntity{
+public class Role extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private RoleNameEnum role;
 

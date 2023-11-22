@@ -7,6 +7,7 @@ import shop.springbootapp.model.enums.ProductTypeEnum;
 
 import java.util.Optional;
 import java.util.UUID;
+
 @Repository
 public interface ProductTypeRepository extends JpaRepository<ProductType, UUID> {
 

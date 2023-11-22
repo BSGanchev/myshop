@@ -14,8 +14,9 @@ import java.util.UUID;
 public interface ActivationTokenRepository extends JpaRepository<UserActivationToken, UUID> {
     @Query(nativeQuery = true, value = "SELECT ual.user_id FROM user_activation_links AS ual WHERE activation_link = ?;")
     UUID getUserId(String activationLink);
+
     @Modifying
-    @Query(nativeQuery = true, value = "SELECT * FROM user_activation_links WHERE datediff(now(), created) >= 1;")
+    @Query(nativeQuery = true, value = "SELECT * FROM user_activation_links WHERE DATEDIFF(NOW(), created) >= 1;")
     List<UserActivationToken> findExpiredToken();
 
     Optional<UserActivationToken> findByActivationToken(String token);

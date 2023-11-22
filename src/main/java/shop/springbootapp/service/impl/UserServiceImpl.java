@@ -1,6 +1,5 @@
 package shop.springbootapp.service.impl;
 
-import jakarta.persistence.Id;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
@@ -9,7 +8,6 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.enums.RoleNameEnum;
@@ -23,7 +21,6 @@ import shop.springbootapp.service.exception.UserAlreadyExistException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -54,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void initUser() {
-        if(this.userRepository.count() != 0) {
+        if (this.userRepository.count() != 0) {
             return;
         }
         AppUser appUser = new AppUser();
@@ -66,11 +63,13 @@ public class UserServiceImpl implements UserService {
         appUser.getRoles().add(this.roleRepository.findByRole(RoleNameEnum.ADMIN).orElse(null));
         this.userRepository.save(appUser);
     }
+
     @Override
     public void changeLastLoginTime(String name) {
         this.userRepository.setLastLoginTime(name);
 
     }
+
     @Override
     public int getUsersFromSessionRegistryCount() {
         return this.sessionRegistry.getAllPrincipals().size();
@@ -82,7 +81,7 @@ public class UserServiceImpl implements UserService {
         return principals.stream()
                 .map(principal -> modelMapper.map(principal, AppUser.class))
                 .toList()
-                .stream().map(appUser-> {
+                .stream().map(appUser -> {
                     AppUser loggedUser = this.userRepository.findByUsername(appUser.getUsername()).orElse(null);
                     modelMapper.map(loggedUser, AppUser.class);
                     return loggedUser;
@@ -92,7 +91,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
 
-        if(emailExist(userServiceModel)){
+        if (emailExist(userServiceModel)) {
             throw new UserAlreadyExistException(
                     "There is an account with that email address: "
                             + userServiceModel.getEmail());
@@ -107,6 +106,7 @@ public class UserServiceImpl implements UserService {
         this.applicationEventPublisher.publishEvent(new UserRegistrationEvent("UserService", userServiceModel.getEmail(), userServiceModel.getUsername()));
 
     }
+
     private boolean emailExist(UserServiceModel userServiceModel) {
         return this.userRepository.findByEmail(userServiceModel.getEmail()).isPresent();
     }

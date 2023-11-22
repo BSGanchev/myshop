@@ -9,7 +9,9 @@ import java.util.UUID;
 
 public interface UserService {
     AppUser findByUsername(String username);
+
     void initUser();
+
     void changeLastLoginTime(String name);
 
     int getUsersFromSessionRegistryCount();

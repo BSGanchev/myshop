@@ -38,20 +38,21 @@
     overflow: hidden;
     text-align: center;
 }
-.container form .links{
+
+.container form .links {
     background: #fff;
     padding: 30px 15px;
 }
 
-.container form .title{
+.container form .title {
     font-size: 17px;
     padding-bottom: 15px;
     color: #666;
 }
 
-.container form .links .buttons .btn{
+.container form .links .buttons .btn {
     display: inline-block;
-    margin:5px;
+    margin: 5px;
     border: var(--border);
     border-radius: 5px;
     background: var(--pink);
@@ -63,27 +64,27 @@
 
 }
 
-.container form .links .buttons .btn:hover{
+.container form .links .buttons .btn:hover {
     background: var(--light-pink);
     letter-spacing: 2px;
 }
 
-.container form .links .buttons .btn i{
+.container form .links .buttons .btn i {
     color: #fff;
     padding-right: 5px;
 }
 
-.container form .links .buttons .btn:hover i{
+.container form .links .buttons .btn:hover i {
     letter-spacing: 2px;
 
 }
 
-.container form .input-box{
+.container form .input-box {
     padding: 30px;
     background: var(--light-pink);
 }
 
-.container form .input-box .input{
+.container form .input-box .input {
     margin: 15px auto;
     display: flex;
     align-items: center;
@@ -92,10 +93,10 @@
     border-radius: 5px;
     background: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
-    border:var(--border);
+    border: var(--border);
 }
 
-.container form .input-box .input input{
+.container form .input-box .input input {
     height: 100%;
     width: 100%;
     padding: 10px;
@@ -104,14 +105,14 @@
     text-transform: none;
 }
 
-.container form .input-box .input span{
+.container form .input-box .input span {
     color: #999;
     padding-right: 15px;
     padding-left: 20px;
     font-size: 20px;
 }
 
-.container form .sign-in-btn-box{
+.container form .sign-in-btn-box {
     display: inline-flex;
     align-items: first baseline;
     gap: 25px;
@@ -119,7 +120,7 @@
     padding-bottom: 20%;
 }
 
-.container form .sign-in-btn{
+.container form .sign-in-btn {
     padding: 10px 40px;
     margin-top: 10px;
     font-size: 17px;
@@ -131,6 +132,6 @@
     flex-grow: 1;
 }
 
-.container form .sign-in-btn:hover{
+.container form .sign-in-btn:hover {
     letter-spacing: 2px;
 }

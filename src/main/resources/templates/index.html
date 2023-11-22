@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
 </head>
 
 <body>
 
 <header>
-    <input type="checkbox" name="" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
+    <input id="toggler" name="" type="checkbox">
+    <label class="fas fa-bars" for="toggler"></label>
 
-    <a href="#" class="logo">Piece of Beauty<span>.</span></a>
+    <a class="logo" href="#">Piece of Beauty<span>.</span></a>
     <nav class="navbar">
         <a href="#home">Home</a>
         <a href="#about">About</a>
@@ -27,19 +27,20 @@
     </nav>
 
     <div class="icons">
-        <a>Hello<th:block sec:authorize="isAuthenticated()">
-            <th:block sec:authentication='name'></th:block>
-        </th:block>
+        <a>Hello
+            <th:block sec:authorize="isAuthenticated()">
+                <th:block sec:authentication='name'></th:block>
+            </th:block>
         </a>
-        <a href="#" class="fas fa-heart"></a>
-        <a href="#" class="fas fa-shopping-cart"></a>
+        <a class="fas fa-heart" href="#"></a>
+        <a class="fas fa-shopping-cart" href="#"></a>
         <th:block sec:authorize="!isAuthenticated()">
-            <a th:href="@{/users/login}" class="fas fa-sign-in"></a>
+            <a class="fas fa-sign-in" th:href="@{/users/login}"></a>
         </th:block>
         <th:block sec:authorize="isAuthenticated()">
-        <form th:action="@{/users/logout}" th:method="POST">
-            <button type="submit" class="fas fa-sign-out"></button>
-        </form>
+            <form th:action="@{/users/logout}" th:method="POST">
+                <button class="fas fa-sign-out" type="submit"></button>
+            </form>
         </th:block>
     </div>
 </header>
@@ -50,7 +51,7 @@
         <span> hand made beauties </span>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores earum iure maiores. Culpa rem maxime
             iusto repellendus sapiente accusantium labore?</p>
-        <a href="#" class="btn">shop now</a>
+        <a class="btn" href="#">shop now</a>
     </div>
 </section>
 <!-- about section -->
@@ -60,21 +61,21 @@
     </h1>
     <div class="row">
         <div class="video-container">
-            <video src="/images/about-us.mp4" loop autoplay muted></video>
+            <video autoplay loop muted src="/images/about-us.mp4"></video>
             <h3>photo album for baby girl</h3>
         </div>
         <div class="content">
             <h3>why chose us?</h3>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit id libero aspernatur nihil,
                 obcaecati ad laboriosam laudantium aperiam laborum dicta.</p>
-            <a href="#" class="btn">learn more</a>
+            <a class="btn" href="#">learn more</a>
         </div>
     </div>
 </section>
 <!-- icons section -->
 <section class="icons-container">
     <div class="icons">
-        <img src="/images/delivery.png" alt="">
+        <img alt="" src="/images/delivery.png">
         <div class="info">
             <hr>
             Express delivery</h3>
@@ -82,7 +83,7 @@
         </div>
     </div>
     <div class="icons">
-        <img src="/images/gifts-icon.png" alt="">
+        <img alt="" src="/images/gifts-icon.png">
         <div class="info">
             <hr>
             Offer & gifts</h3>
@@ -97,11 +98,11 @@
         <div class="box">
             <span class="discount">-15%</span>
             <div class="image">
-                <img src="/images/christmas-ball-discount.jpg" alt="">
+                <img alt="" src="/images/christmas-ball-discount.jpg">
                 <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
+                    <a class="fas fa-heart" href="#"></a>
+                    <a class="cart-btn" href="#">add to cart</a>
+                    <a class="fas fa-share" href="#"></a>
                 </div>
             </div>
             <div class="content">
@@ -113,11 +114,11 @@
         <div class="box">
             <span class="discount">-15%</span>
             <div class="image">
-                <img src="/images/photo-album-discount.jpg" alt="">
+                <img alt="" src="/images/photo-album-discount.jpg">
                 <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
+                    <a class="fas fa-heart" href="#"></a>
+                    <a class="cart-btn" href="#">add to cart</a>
+                    <a class="fas fa-share" href="#"></a>
                 </div>
             </div>
             <div class="content">
@@ -143,7 +144,7 @@
                 necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere dicta debitis
                 voluptate natus nisi commodi.</p>
             <div class="user">
-                <img src="/images/user.png" alt="">
+                <img alt="" src="/images/user.png">
                 <div class="user-info">
                     <h3>John Doe</h3>
                     <span>Happy costomer</span>
@@ -163,7 +164,7 @@
                 necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere dicta debitis
                 voluptate natus nisi commodi.</p>
             <div class="user">
-                <img src="/images/user.png" alt="">
+                <img alt="" src="/images/user.png">
                 <div class="user-info">
                     <h3>John Doe</h3>
                     <span>Happy costomer</span>
@@ -183,17 +184,17 @@
 
         <form action="">
             <label for="name"></label>
-            <input type="text" placeholder="name" class="box" id="name">
+            <input class="box" id="name" placeholder="name" type="text">
             <label for="email"></label>
-            <input type="email" placeholder="email" class="box" id="email">
+            <input class="box" id="email" placeholder="email" type="email">
             <label for="number"></label>
-            <input type="number" placeholder="number" class="box" id="number">
+            <input class="box" id="number" placeholder="number" type="number">
             <label for="message"></label>
-            <textarea name="" class="box" placeholder="message" id="message" cols="30" rows="10"></textarea>
-            <input type="submit" value="send message" class="btn">
+            <textarea class="box" cols="30" id="message" name="" placeholder="message" rows="10"></textarea>
+            <input class="btn" type="submit" value="send message">
         </form>
         <div class="image">
-            <img src="/images/contact-us.jpg" alt="">
+            <img alt="" src="/images/contact-us.jpg">
         </div>
     </div>
 </section>
@@ -220,7 +221,7 @@
                 <a href="#">Varna, Bulgaria, 9000</a>
                 <div class="delivery-row">
                     <a href="https://www.econt.com/">Cash on Delivery</a>
-                    <img src="/images/econt-icon.png" alt="">
+                    <img alt="" src="/images/econt-icon.png">
                 </div>
             </div>
         </div>

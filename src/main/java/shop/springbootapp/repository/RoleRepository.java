@@ -7,6 +7,7 @@ import shop.springbootapp.model.enums.RoleNameEnum;
 
 import java.util.Optional;
 import java.util.UUID;
+
 @Repository
 public interface RoleRepository extends JpaRepository<Role, UUID> {
     Optional<Role> findByRole(RoleNameEnum role);

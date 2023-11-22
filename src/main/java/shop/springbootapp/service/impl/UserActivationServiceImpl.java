@@ -38,6 +38,7 @@ public class UserActivationServiceImpl implements UserActivationService {
         String activationLink = createActivationToken(event.getEmail());
         emailService.sendRegistrationEmail(event.getEmail(), event.getUsername(), activationLink);
     }
+
     @Transactional
     @Override
     public void deleteObsoleteActivationToken() {

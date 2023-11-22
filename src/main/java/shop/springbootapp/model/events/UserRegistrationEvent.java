@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationEvent;
 public class UserRegistrationEvent extends ApplicationEvent {
     private final String email;
     private final String username;
+
     public UserRegistrationEvent(Object source, String email, String username) {
         super(source);
         this.email = email;

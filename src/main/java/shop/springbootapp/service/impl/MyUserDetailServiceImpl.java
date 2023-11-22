@@ -34,6 +34,7 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
                 .authorities(appUser.getRoles().stream().map(this::map).collect(Collectors.toSet()))
                 .build();
     }
+
     private GrantedAuthority map(Role role) {
         return new SimpleGrantedAuthority("ROLE_" + role.getRole().name());
 

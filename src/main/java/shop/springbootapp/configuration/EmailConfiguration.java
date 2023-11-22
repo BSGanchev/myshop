@@ -18,7 +18,7 @@ public class EmailConfiguration {
     }
 
     @Bean
-    public JavaMailSender javaMailSender(){
+    public JavaMailSender javaMailSender() {
 
         JavaMailSenderImpl javaMailSender = getJavaMailSender();
 

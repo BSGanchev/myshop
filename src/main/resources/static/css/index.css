@@ -90,6 +90,7 @@ header .navbar a:hover {
     color: var(--pink);
 
 }
+
 header .icons {
     display: flex;
     justify-content: center;
@@ -106,6 +107,7 @@ header .icons a {
 header .icons a:hover {
     color: var(--pink);
 }
+
 header .icons form {
     display: flex;
     flex-direction: column;
@@ -122,6 +124,7 @@ header .icons form button {
     visibility: visible;
 
 }
+
 header .icons button:hover {
     color: var(--pink);
 }
@@ -416,7 +419,7 @@ header .fa-bars {
     color: #999;
 }
 
-.contact .row{
+.contact .row {
     display: flex;
     flex-wrap: wrap-reverse;
     gap: 1.5rem;
@@ -470,24 +473,25 @@ header .fa-bars {
     flex: 1 1 25rem;
 }
 
-.footer .box-container .box h3{
-   color: #333;
-   font-size: 2.5rem;
-   padding: 1rem 0;
+.footer .box-container .box h3 {
+    color: #333;
+    font-size: 2.5rem;
+    padding: 1rem 0;
 }
 
-.footer .box-container .box a{
+.footer .box-container .box a {
     display: block;
     color: #666;
     font-size: 1.5rem;
     padding: 1rem 0;
 }
 
-.footer .box-container .box a:hover{
+.footer .box-container .box a:hover {
     color: var(--pink);
     text-decoration: underline;
 }
-.footer .box-container .box img{
+
+.footer .box-container .box img {
     margin-top: 1rem;
 }
 
@@ -498,10 +502,12 @@ header .fa-bars {
     gap: 1.5rem;
     flex-direction: row-reverse;
 }
-.footer .box-container .box .delivery-row a{
+
+.footer .box-container .box .delivery-row a {
     flex-grow: 2;
 }
-.footer .box-container .box .delivery-row img{
+
+.footer .box-container .box .delivery-row img {
     flex-grow: 1;
     max-width: 10%;
     display: block;
@@ -516,16 +522,15 @@ header .fa-bars {
     color: #333;
     border-top: .1rem solid rgba(0, 0, 0, .1);
 }
+
 .footer .credit span {
     color: var(--pink);
 }
 
 
-
-
 /* queries */
 
-@media(max-width:991px) {
+@media (max-width: 991px) {
     html {
         font-size: 55%;
     }
@@ -543,7 +548,7 @@ header .fa-bars {
     }
 }
 
-@media(max-width:768px) {
+@media (max-width: 768px) {
 
     header .fa-bars {
         display: block;
@@ -559,7 +564,7 @@ header .fa-bars {
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     }
 
-    header #toggler:checked~.navbar {
+    header #toggler:checked ~ .navbar {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
@@ -588,7 +593,7 @@ header .fa-bars {
     }
 }
 
-@media(max-width:450px) {
+@media (max-width: 450px) {
     html {
         font-size: 50%;
     }

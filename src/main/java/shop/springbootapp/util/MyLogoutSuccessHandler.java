@@ -10,15 +10,15 @@ import java.io.IOException;
 
 public class MyLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 
-        @Override
-        public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                    Authentication authentication) throws IOException, ServletException {
+    @Override
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
+                                Authentication authentication) throws IOException, ServletException {
 
-            if (authentication != null) {
-                setDefaultTargetUrl("/");
-            }
+        if (authentication != null) {
             setDefaultTargetUrl("/");
-            super.onLogoutSuccess(request, response, authentication);
         }
+        setDefaultTargetUrl("/");
+        super.onLogoutSuccess(request, response, authentication);
+    }
 
 }

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Judge v2</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </head>
@@ -22,9 +22,9 @@
         <a class="navbar-brand" href="#">
             <h3 class="tm-site-title mb-0">Piece of Beauty</h3>
         </a>
-        <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler ml-auto mr-0" data-target="#navbarSupportedContent"
+                data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -55,19 +55,19 @@
                         </a>
                     </th:block>
                 </li>
-                <li sec:authorize="!isAuthenticated()" class="nav-item">
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
                     <a class="nav-link d-flex" th:href="@{/users/login}">
                         <span>Login</span>
                     </a>
                 </li>
-                <li sec:authorize="!isAuthenticated()" class="nav-item">
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
                     <a class="nav-link d-flex" th:href="@{/users/register}">
                         <span>Register</span>
                     </a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form th:method="POST" th:action="@{/users/logout}">
-                        <input type="submit" value="Logout" class="nav-link d-flex">
+                    <form th:action="@{/users/logout}" th:method="POST">
+                        <input class="nav-link d-flex" type="submit" value="Logout">
                     </form>
                 </li>
             </ul>

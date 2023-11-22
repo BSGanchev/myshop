@@ -5,55 +5,56 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/register.css">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="/css/register.css" rel="stylesheet">
 </head>
 
 <body>
-    <section class="container">
-            <header>Registration form</header>
-        <form class="form" th:action="@{/users/register}" th:method = "POST" th:object="${registerUserDTO}">
-            <div class="column" th:ob>
-                <div class="input-box" >
-                    <label for="username">Username</label>
-                    <input th:field="*{username}" type="text" placeholder="Enter a valid Username" id="username">
-                </div>
-                <div class="input-box">
-                    <label for="email">Email</label>
-                    <input th:field="*{email}" type="email" placeholder="Enter a valid email address" id="email">
-                </div>
+<section class="container">
+    <header>Registration form</header>
+    <form class="form" th:action="@{/users/register}" th:method="POST" th:object="${registerUserDTO}">
+        <div class="column" th:ob>
+            <div class="input-box">
+                <label for="username">Username</label>
+                <input id="username" placeholder="Enter a valid Username" th:field="*{username}" type="text">
             </div>
-            <div class="column">
-                <div class="input-box">
-                    <label for="firstname">First Name</label>
-                    <input th:field="*{firstName}" type="text" placeholder="Enter a First Name" id="firstname">
-                </div>
-                <div class="input-box">
-                    <label for="lastname">Last Name</label>
-                    <input th:field="*{lastName}" type="text" placeholder="Enter a Last Name" id="lastname">
-                </div>
+            <div class="input-box">
+                <label for="email">Email</label>
+                <input id="email" placeholder="Enter a valid email address" th:field="*{email}" type="email">
             </div>
-            <div class="column">
-                <div class="input-box">
-                    <label for="password">Password</label>
-                    <input th:field="*{password}" type="password" placeholder="Enter a Password" id="password">
-                </div>
-                <div class="input-box">
-                    <label for="confirmpassword">Confirm password</label>
-                    <input th:field="*{confirmPassword}" type="password" placeholder="Password must mach" id="confirmpassword">
-                </div>
+        </div>
+        <div class="column">
+            <div class="input-box">
+                <label for="firstname">First Name</label>
+                <input id="firstname" placeholder="Enter a First Name" th:field="*{firstName}" type="text">
             </div>
-            <div class="text-center input-box">
-                <label for="phonenumber">Phone number</label>
-                <input th:field="*{phoneNumber}" type="text" placeholder="Enter a phone number" id="phonenumber">
+            <div class="input-box">
+                <label for="lastname">Last Name</label>
+                <input id="lastname" placeholder="Enter a Last Name" th:field="*{lastName}" type="text">
             </div>
-            <button>Register</button>
-        </form>
-    </section>
+        </div>
+        <div class="column">
+            <div class="input-box">
+                <label for="password">Password</label>
+                <input id="password" placeholder="Enter a Password" th:field="*{password}" type="password">
+            </div>
+            <div class="input-box">
+                <label for="confirmpassword">Confirm password</label>
+                <input id="confirmpassword" placeholder="Password must mach" th:field="*{confirmPassword}"
+                       type="password">
+            </div>
+        </div>
+        <div class="text-center input-box">
+            <label for="phonenumber">Phone number</label>
+            <input id="phonenumber" placeholder="Enter a phone number" th:field="*{phoneNumber}" type="text">
+        </div>
+        <button>Register</button>
+    </form>
+</section>
 </body>
 
 </html>

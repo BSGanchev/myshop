@@ -5,6 +5,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import shop.springbootapp.model.enums.ProductTypeEnum;
+
 @Entity
 @Table(name = "product_types")
 public class ProductType extends BaseEntity {
