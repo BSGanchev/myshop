@@ -14,6 +14,8 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<AppUser, UUID> {
 
     Optional<AppUser> findByUsername(String username);
+
+    Optional<AppUser> findByEmail(String email);
     @Modifying
     @Transactional
     @Query("update AppUser u set u.lastLogged = now() where u.username = ?1")
@@ -21,4 +23,6 @@ public interface UserRepository extends JpaRepository<AppUser, UUID> {
 
     @Query(value = "SELECT * FROM pofb.users AS u ORDER BY u.last_logged DESC LIMIT 20", nativeQuery = true)
     List<AppUser> findAllLLoggedIn();
+    @Query(nativeQuery = true, value = "UPDATE users JOIN user_activation_links ual ON users.id = ual.user_id SET disabled = false WHERE  ual.activation_link = ?;")
+    void activateUser(String activationLink);
 }

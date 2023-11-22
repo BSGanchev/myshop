@@ -30,6 +30,7 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
         return User
                 .withUsername(appUser.getUsername())
                 .password(appUser.getPassword())
+                .disabled(appUser.isDisabled())
                 .authorities(appUser.getRoles().stream().map(this::map).collect(Collectors.toSet()))
                 .build();
     }

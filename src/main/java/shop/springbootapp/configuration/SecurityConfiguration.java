@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.repository.UserRepository;
 import shop.springbootapp.service.impl.MyUserDetailServiceImpl;
@@ -22,51 +20,54 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         return httpSecurity.authorizeHttpRequests(
-                authorizeRequest -> authorizeRequest
-                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/users/login", "/users/register").permitAll()
-                        .requestMatchers("/owner").hasRole(RoleNameEnum.OWNER.name())
-                        .requestMatchers("/admin").hasRole(RoleNameEnum.ADMIN.name())
-                        .anyRequest().authenticated()
-        ).formLogin(
-                formLogin -> formLogin
-                        .loginPage("/users/login")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .defaultSuccessUrl("/")
-                        .successHandler(myAuthenticationSuccessHandler())
-                        .failureForwardUrl("/users/error?continue")
-        ).logout(
-                logout -> logout
-                        .logoutUrl("/users/logout")
-                        .logoutSuccessUrl("/")
-                        .logoutSuccessHandler(myLogoutSuccessHandler())
-                        .deleteCookies("JSESSIONID")
-                        .invalidateHttpSession(true)
-        ).
+                        authorizeRequest -> authorizeRequest
+                                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers("/", "/users/login", "/users/register").permitAll()
+                                .requestMatchers("/owner").hasRole(RoleNameEnum.OWNER.name())
+                                .requestMatchers("/admin").hasRole(RoleNameEnum.ADMIN.name())
+                                .anyRequest().authenticated()
+                ).formLogin(
+                        formLogin -> formLogin
+                                .loginPage("/users/login")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
+                                .defaultSuccessUrl("/")
+                                .successHandler(myAuthenticationSuccessHandler())
+                                .failureForwardUrl("/users/error?continue")
+                ).logout(
+                        logout -> logout
+                                .logoutUrl("/users/logout")
+                                .logoutSuccessUrl("/")
+                                .logoutSuccessHandler(myLogoutSuccessHandler())
+                                .deleteCookies("JSESSIONID")
+                                .invalidateHttpSession(true)
+                ).
 
                 sessionManagement(
-            httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
-                    .maximumSessions(1)
-                    .sessionRegistry(sessionRegistry()))
+                        httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
+                                .maximumSessions(1)
+                                .sessionRegistry(sessionRegistry()))
 
-        .build();
+                .build();
     }
+
     @Bean
-    public MyUserDetailServiceImpl userDetailService(UserRepository userRepository){
+    public MyUserDetailServiceImpl userDetailService(UserRepository userRepository) {
         return new MyUserDetailServiceImpl(userRepository);
     }
+
     @Bean
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
 
     @Bean
-    public MyLogoutSuccessHandler myLogoutSuccessHandler(){
+    public MyLogoutSuccessHandler myLogoutSuccessHandler() {
         return new MyLogoutSuccessHandler();
     }
+
     @Bean
-    public MyAuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+    public MyAuthenticationSuccessHandler myAuthenticationSuccessHandler() {
         return new MyAuthenticationSuccessHandler();
     }
 }

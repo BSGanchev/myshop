@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.view.AppUserView;
 import shop.springbootapp.service.UserService;
@@ -26,16 +27,15 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String adminPage(Model model) {
-
         model.addAttribute("activeUsersCount", this.userService.getUsersFromSessionRegistryCount());
 
-        List<AppUser> lastLoggedUsers = this.userService.getLastLoggedUsers();
+        List<AppUser> lastLoggedUsers = this.userService.getLoggedUsers();
 
         List<AppUserView> appUserViews = lastLoggedUsers.stream()
                 .map(appUser -> (modelMapper.map(appUser, AppUserView.class)))
                 .collect(Collectors.toList());
 
-        model.addAttribute("lastLoggedUsers", appUserViews );
+        model.addAttribute("loggedUsers", appUserViews );
 
         return "admin-page";
     }

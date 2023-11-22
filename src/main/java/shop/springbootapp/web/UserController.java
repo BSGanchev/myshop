@@ -1,20 +1,19 @@
 package shop.springbootapp.web;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import shop.springbootapp.model.dto.RegisterUserDTO;
 import shop.springbootapp.model.service.UserServiceModel;
 import shop.springbootapp.service.UserService;
 
-import java.time.LocalDateTime;
+import java.lang.reflect.Method;
 
 import static org.springframework.validation.BindingResult.MODEL_KEY_PREFIX;
 
@@ -41,8 +40,9 @@ public class UserController {
         return "register";
     }
     @PostMapping("/register")
-    public String registerConfirm(@Valid @ModelAttribute("registerUserDTO") RegisterUserDTO registerUserDTO,
-                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String registerConfirm(@ModelAttribute("registerUserDTO") @Valid RegisterUserDTO registerUserDTO,
+                                  BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                  HttpServletRequest request) {
 
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("registerUserDTO",registerUserDTO);
@@ -51,9 +51,9 @@ public class UserController {
             return "redirect:register";
         }
 
-
         this.userService.registerUser(modelMapper.map(registerUserDTO, UserServiceModel.class));
 
         return "redirect:login";
     }
+
 }

@@ -1,7 +1,6 @@
 package shop.springbootapp.model.service;
 
 import shop.springbootapp.model.entity.Role;
-import shop.springbootapp.model.enums.RoleNameEnum;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -16,7 +15,7 @@ public class UserServiceModel {
     private String phoneNumber;
     private Set<Role> roles;
     private LocalDateTime registered;
-    private boolean isEnabled;
+    private boolean disabled;
 
     public UserServiceModel() {
         this.roles = new HashSet<>();
@@ -87,11 +86,11 @@ public class UserServiceModel {
         this.registered = registered;
     }
 
-    public boolean isEnabled() {
-        return isEnabled;
+    public boolean isDisabled() {
+        return disabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

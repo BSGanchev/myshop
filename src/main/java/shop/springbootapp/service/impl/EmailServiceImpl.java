@@ -11,8 +11,6 @@ import shop.springbootapp.model.service.MailPropertyAccess;
 import shop.springbootapp.service.EmailService;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -20,6 +18,7 @@ public class EmailServiceImpl implements EmailService {
     private final TemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
     private final MailPropertyAccess mailPropertyAccess;
+    private final static String EMAIL_TEMPLATE_LOCATION = "email/registration-email";
 
     public EmailServiceImpl(TemplateEngine templateEngine, JavaMailSender javaMailSender, MailPropertyAccess mailPropertyAccess) {
         this.templateEngine = templateEngine;
@@ -28,25 +27,29 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendRegistrationEmail(String email, String username) throws MessagingException {
+    public void sendRegistrationEmail(String email, String username, String activationLink) throws MessagingException {
+
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+
+
 
         helper.setTo(email);
         helper.setFrom(mailPropertyAccess.getaPofBMailEmail());
         helper.setReplyTo(mailPropertyAccess.getaPofBMailEmail());
         helper.setSentDate(Date.from(Instant.now()));
-        helper.setSubject("Welcome to A Piece of Beauty");
-        helper.setText(generateRegistrationEmailBody(username), true);
+        helper.setSubject(mailPropertyAccess.getaPofBMailFrom());
+        helper.setText(generateRegistrationEmailBody(username, activationLink), true);
 
         javaMailSender.send(mimeMessage);
-
     }
 
-    private String generateRegistrationEmailBody(String username) {
+    private String generateRegistrationEmailBody(String username, String activationLink) {
         Context context = new Context();
         context.setVariable("username", username);
+        context.setVariable("activationLink", activationLink);
 
-        return templateEngine.process("registration-email", context);
+
+        return templateEngine.process(EMAIL_TEMPLATE_LOCATION, context);
     }
 }

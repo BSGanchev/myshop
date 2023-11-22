@@ -19,7 +19,7 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+        System.out.println(authentication.getPrincipal().toString());
         if (authentication.getAuthorities().toString().contains(RoleNameEnum.ADMIN.name())) {
             return "redirect:/admin";
         } else if (authentication.getAuthorities().toString().contains(RoleNameEnum.OWNER.name())) {

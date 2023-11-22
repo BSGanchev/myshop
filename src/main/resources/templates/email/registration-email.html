@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation email</title>
+</head>
+<body>
+<h1>Welcome ot A Piece of Beauty shop, <th:block th:text="${username}"></th:block></h1>
+<h2>please follow the
+    <a class="card-link" th:href="@{http://localhost:8080/users/activate/{activationLink}(activationLink=*{activationLink})}">link</a>
+    in order to activate your account</h2>
+</body>
+</html>

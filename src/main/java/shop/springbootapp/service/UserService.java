@@ -12,7 +12,11 @@ public interface UserService {
 
     int getUsersFromSessionRegistryCount();
 
-    List<AppUser> getLastLoggedUsers();
+    List<AppUser> getLoggedUsers();
 
     void registerUser(UserServiceModel userServiceModel);
+
+    AppUser getCurrentUser(String name);
+
+    void setUserActive(String activationLink);
 }

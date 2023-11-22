@@ -20,7 +20,7 @@
     <td class="last-logged-user-column">Edit</td>
     </thead>
     <tbody>
-    <tr th:each="user : ${lastLoggedUsers}">
+    <tr th:each="user : ${loggedUsers}">
         <td class="last-logged-user-column" th:text="${user.username}"></td>
         <td class="last-logged-user-column">
             <a th:each="userrole : ${user.roles}" th:text="${userrole.role.name().toLowerCase()}">[Role]</a>

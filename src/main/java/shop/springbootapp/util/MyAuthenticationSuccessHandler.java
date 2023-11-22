@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import shop.springbootapp.service.UserService;
 
@@ -18,7 +20,10 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
 
-        userService.changeLastLoginTime(authentication.getName());
+        this.userService.changeLastLoginTime(authentication.getName());
+
+        this.userService.getCurrentUser(authentication.getName());
+
         setDefaultTargetUrl("/");
         super.onAuthenticationSuccess(request, response, authentication);
     }

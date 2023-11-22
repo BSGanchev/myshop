@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import shop.springbootapp.model.entity.Cart;
 
 @Configuration
 public class ApplicationBeanConfiguration {
@@ -16,5 +17,10 @@ public class ApplicationBeanConfiguration {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+    }
+
+    @Bean
+    public Cart cart() {
+        return new Cart();
     }
 }
