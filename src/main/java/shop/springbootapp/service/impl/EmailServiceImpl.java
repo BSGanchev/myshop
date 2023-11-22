@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import shop.springbootapp.model.events.UserRegistrationEvent;
 import shop.springbootapp.model.service.MailPropertyAccess;
 import shop.springbootapp.service.EmailService;
 
@@ -27,7 +28,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendRegistrationEmail(String email, String username, String activationLink) throws MessagingException {
+    public void sendRegistrationEmail(String email, String username, String activationToken) throws MessagingException {
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
@@ -39,15 +40,16 @@ public class EmailServiceImpl implements EmailService {
         helper.setReplyTo(mailPropertyAccess.getaPofBMailEmail());
         helper.setSentDate(Date.from(Instant.now()));
         helper.setSubject(mailPropertyAccess.getaPofBMailFrom());
-        helper.setText(generateRegistrationEmailBody(username, activationLink), true);
+        helper.setText(generateRegistrationEmailBody(username,
+                "http://localhost:8080/users/activation?token=" + activationToken), true);
 
         javaMailSender.send(mimeMessage);
     }
 
-    private String generateRegistrationEmailBody(String username, String activationLink) {
+    private String generateRegistrationEmailBody(String username, String activationToken) {
         Context context = new Context();
         context.setVariable("username", username);
-        context.setVariable("activationLink", activationLink);
+        context.setVariable("activationToken", activationToken);
 
 
         return templateEngine.process(EMAIL_TEMPLATE_LOCATION, context);

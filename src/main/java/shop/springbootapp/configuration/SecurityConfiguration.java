@@ -22,7 +22,7 @@ public class SecurityConfiguration {
         return httpSecurity.authorizeHttpRequests(
                         authorizeRequest -> authorizeRequest
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                .requestMatchers("/", "/users/login", "/users/register").permitAll()
+                                .requestMatchers("/", "/users/login", "/users/register", "/users/activation").permitAll()
                                 .requestMatchers("/owner").hasRole(RoleNameEnum.OWNER.name())
                                 .requestMatchers("/admin").hasRole(RoleNameEnum.ADMIN.name())
                                 .anyRequest().authenticated()

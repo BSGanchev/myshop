@@ -8,9 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.Instant;
 
 @Entity
-@Table(name = "user_activation_links")
+@Table(name = "user_activation_tokens")
 public class UserActivationToken extends BaseEntity {
-    private String activationLink;
+    private String activationToken;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Instant created;
@@ -20,12 +20,12 @@ public class UserActivationToken extends BaseEntity {
     public UserActivationToken() {
     }
 
-    public String getActivationLink() {
-        return activationLink;
+    public String getActivationToken() {
+        return activationToken;
     }
 
-    public void setActivationLink(String activationLink) {
-        this.activationLink = activationLink;
+    public void setActivationToken(String activationToken) {
+        this.activationToken = activationToken;
     }
 
     public Instant getCreated() {

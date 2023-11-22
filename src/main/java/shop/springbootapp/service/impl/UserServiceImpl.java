@@ -9,7 +9,9 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import shop.springbootapp.model.entity.AppUser;
+import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.model.events.UserRegistrationEvent;
 import shop.springbootapp.model.service.UserServiceModel;
@@ -120,9 +122,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void setUserActive(String activationLink) {
+    public void setUserActive(UUID id) {
 
-        this.userRepository.activateUser(activationLink);
+        this.userRepository.activateUser(id);
     }
 
+    @Override
+    public UserActivationToken getActivationToken(String token) {
+        return this.userActivationService.getActivationToken(token);
+
+    }
+
+    @Override
+    public void deleteUsedToken(UserActivationToken activationToken) {
+        this.userActivationService.deleteUsedActivationToken(activationToken);
+    }
 }

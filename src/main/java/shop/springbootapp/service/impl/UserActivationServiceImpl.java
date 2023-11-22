@@ -2,12 +2,11 @@ package shop.springbootapp.service.impl;
 
 import jakarta.mail.MessagingException;
 import org.springframework.context.event.EventListener;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.events.UserRegistrationEvent;
-import shop.springbootapp.repository.ActivationLinkRepository;
+import shop.springbootapp.repository.ActivationTokenRepository;
 import shop.springbootapp.repository.UserRepository;
 import shop.springbootapp.service.EmailService;
 import shop.springbootapp.service.UserActivationService;
@@ -21,9 +20,9 @@ import java.util.UUID;
 public class UserActivationServiceImpl implements UserActivationService {
     private final EmailService emailService;
     private final UserRepository userRepository;
-    private final ActivationLinkRepository activationTokenRepository;
+    private final ActivationTokenRepository activationTokenRepository;
 
-    public UserActivationServiceImpl(EmailService emailService, UserRepository userRepository, ActivationLinkRepository activationTokenRepository) {
+    public UserActivationServiceImpl(EmailService emailService, UserRepository userRepository, ActivationTokenRepository activationTokenRepository) {
         this.emailService = emailService;
         this.userRepository = userRepository;
         this.activationTokenRepository = activationTokenRepository;
@@ -55,7 +54,7 @@ public class UserActivationServiceImpl implements UserActivationService {
         String activationToken = generateActivationToken();
 
         UserActivationToken userActivationToken = new UserActivationToken();
-        userActivationToken.setActivationLink(activationToken);
+        userActivationToken.setActivationToken(activationToken);
         userActivationToken.setCreated(Instant.now());
         userActivationToken.setUser(this.userRepository.findByEmail(userEmail).orElseThrow(() -> new ObjectNotFoundException("User with email " + userEmail + " not found!")));
 
@@ -67,5 +66,16 @@ public class UserActivationServiceImpl implements UserActivationService {
     @Override
     public UUID getUserId(String activationLink) {
         return this.activationTokenRepository.getUserId(activationLink);
+    }
+
+    @Override
+    public UserActivationToken getActivationToken(String token) {
+
+        return this.activationTokenRepository.findByActivationToken(token).orElse(null);
+    }
+
+    @Override
+    public void deleteUsedActivationToken(UserActivationToken activationToken) {
+        this.activationTokenRepository.deleteById(activationToken.getId());
     }
 }

@@ -3,17 +3,19 @@ package shop.springbootapp.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import shop.springbootapp.model.dto.RegisterUserDTO;
+import shop.springbootapp.model.entity.AppUser;
+import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.service.UserServiceModel;
 import shop.springbootapp.service.UserService;
 
-import java.lang.reflect.Method;
+import java.util.Calendar;
 
 import static org.springframework.validation.BindingResult.MODEL_KEY_PREFIX;
 
@@ -54,6 +56,19 @@ public class UserController {
         this.userService.registerUser(modelMapper.map(registerUserDTO, UserServiceModel.class));
 
         return "redirect:login";
+    }
+    @GetMapping("/activation")
+    public String registrationConfirm(Model model, @RequestParam("token") String token){
+        UserActivationToken activationToken = userService.getActivationToken(token);
+        if(activationToken == null) {
+            return "redirect:register";
+        }
+        AppUser appUser = activationToken.getUser();
+
+        this.userService.setUserActive(appUser.getId());
+        this.userService.deleteUsedToken(activationToken);
+
+        return "redirect:/";
     }
 
 }

@@ -3,6 +3,7 @@ package shop.springbootapp.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import shop.springbootapp.model.entity.AppUser;
@@ -23,6 +24,8 @@ public interface UserRepository extends JpaRepository<AppUser, UUID> {
 
     @Query(value = "SELECT * FROM pofb.users AS u ORDER BY u.last_logged DESC LIMIT 20", nativeQuery = true)
     List<AppUser> findAllLLoggedIn();
-    @Query(nativeQuery = true, value = "UPDATE users JOIN user_activation_links ual ON users.id = ual.user_id SET disabled = false WHERE  ual.activation_link = ?;")
-    void activateUser(String activationLink);
+    @Modifying
+    @Transactional
+    @Query("UPDATE AppUser u SET u.disabled = FALSE WHERE u.id = :id")
+    void activateUser(@Param("id") UUID id);
 }
