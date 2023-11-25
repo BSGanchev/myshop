@@ -62,6 +62,15 @@ public class UserServiceImpl implements UserService {
         appUser.setRegistered(LocalDateTime.now());
         appUser.getRoles().add(this.roleRepository.findByRole(RoleNameEnum.ADMIN).orElse(null));
         this.userRepository.save(appUser);
+
+        AppUser appUser1 = new AppUser();
+        appUser1.setUsername("user");
+        appUser1.setEmail("user@example.com");
+        appUser1.setPhoneNumber("052112");
+        appUser1.setPassword(passwordEncoder.encode("test"));
+        appUser1.setRegistered(LocalDateTime.now());
+        appUser1.getRoles().add(this.roleRepository.findByRole(RoleNameEnum.USER).orElse(null));
+        this.userRepository.save(appUser1);
     }
 
     @Override

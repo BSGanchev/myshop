@@ -8,4 +8,6 @@ public interface ProductService {
     void initProducts();
 
     List<Product> getALlProducts();
+
+    Product getProductById(String id);
 }

@@ -9,6 +9,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
+    <script src="/js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -101,7 +102,8 @@
                 <img alt="" src="/images/christmas-ball-discount.jpg">
                 <div class="icons">
                     <a class="fas fa-heart" href="#"></a>
-                    <a class="cart-btn" href="#">add to cart</a>
+                    <a class="cart-btn" href="javascript:void(0)" data-id="48dd4919-2c54-4145-af84-4d103d07c46a">add to
+                        cart</a>
                     <a class="fas fa-share" href="#"></a>
                 </div>
             </div>
@@ -117,7 +119,8 @@
                 <img alt="" src="/images/photo-album-discount.jpg">
                 <div class="icons">
                     <a class="fas fa-heart" href="#"></a>
-                    <a class="cart-btn" href="#">add to cart</a>
+                    <a class="cart-btn" href="javascript:void(0)" data-id="a241a6ae-a6c3-41ab-a952-3a9d22d72b5b">add to
+                        cart</a>
                     <a class="fas fa-share" href="#"></a>
                 </div>
             </div>
@@ -229,5 +232,21 @@
     </section>
 </footer>
 </body>
+<script>
+    $("body").on("click", ".cart-btn", function (e) {
+        console.log("211312");
+        var productId = $(this).data('id');
 
+        $.ajax({
+            url: `/cart/products/${productId}/add`,
+            type: "POST",
+            success: function (data) {
+                //TODO
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //TODO
+            }
+        });
+    });
+</script>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/common::head}">
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<nav th:insert="~{fragments/common::nav}"></nav>
+
+<div>
+
+    <div th:remove="tag" th:if="null == products || products.size <= 0">
+        <div>Количката е празна !</div>
+    </div>
+    <table th:if="null != products && products.size > 0">
+        <thead>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.product.productName}"></td>
+            <td th:text="${product.product.price}"></td>
+            <td th:text="${product.quantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer class="row">
+    <div class="col-12 container-fluid text-right font-weight-light">
+        <p class="d-inline-block tm-bg-black text-white py-2 px-4">
+            &copy; Spring Team 2020
+        </p>
+
+    </div>
+</footer>
+</body>
+</html>

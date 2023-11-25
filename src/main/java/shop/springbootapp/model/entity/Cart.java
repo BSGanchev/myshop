@@ -15,7 +15,7 @@ public class Cart extends BaseEntity {
     private AppUser buyer;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Product> products;
-    private boolean ordered;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:s")
     private LocalDateTime orderDate;
 
@@ -37,14 +37,6 @@ public class Cart extends BaseEntity {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }
-
-    public boolean isOrdered() {
-        return ordered;
-    }
-
-    public void setOrdered(boolean ordered) {
-        this.ordered = ordered;
     }
 
     public LocalDateTime getOrderDate() {
