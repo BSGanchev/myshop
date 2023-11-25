@@ -20,37 +20,50 @@
         <div class="column" th:ob>
             <div class="input-box">
                 <label for="username">Username</label>
-                <input id="username" placeholder="Enter a valid Username" th:field="*{username}" type="text">
+                <input id="username" placeholder="Enter a valid Username" th:field="*{username}"
+                       class ="form-control is-invalid" type="text">
+                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback border-danger"></small>
             </div>
             <div class="input-box">
                 <label for="email">Email</label>
-                <input id="email" placeholder="Enter a valid email address" th:field="*{email}" type="email">
+                <input id="email" placeholder="Enter a valid email address" th:field="*{email}"
+                       class="form-control is-invalid" type="email">
+                <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback border-danger"></small>
+                <small th:if="${userEmailExist == true}" class="invalid-feedback border-danger">User with tha email already exist</small>
             </div>
         </div>
         <div class="column">
             <div class="input-box">
                 <label for="firstname">First Name</label>
-                <input id="firstname" placeholder="Enter a First Name" th:field="*{firstName}" type="text">
+                <input id="firstname" placeholder="Enter a First Name" th:field="*{firstName}"
+                class="form-control is-invalid" type="text">
+                <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="invalid-feedback border-danger"></small>
             </div>
             <div class="input-box">
                 <label for="lastname">Last Name</label>
-                <input id="lastname" placeholder="Enter a Last Name" th:field="*{lastName}" type="text">
+                <input id="lastname" placeholder="Enter a Last Name" th:field="*{lastName}" type="text"
+                       class="form-control is-invalid">
+                <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="invalid-feedback border-danger"></small>
             </div>
         </div>
         <div class="column">
             <div class="input-box">
                 <label for="password">Password</label>
-                <input id="password" placeholder="Enter a Password" th:field="*{password}" type="password">
-            </div>
+                <input id="password" placeholder="Enter a Password" th:field="*{password}" type="password"
+                       class="form-control is-invalid" >
+                <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback border-danger"></small>            </div>
             <div class="input-box">
                 <label for="confirmpassword">Confirm password</label>
                 <input id="confirmpassword" placeholder="Password must mach" th:field="*{confirmPassword}"
-                       type="password">
+                       type="password" class="form-control is-invalid">
+                <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="invalid-feedback border-danger"></small>
             </div>
         </div>
         <div class="text-center input-box">
             <label for="phonenumber">Phone number</label>
-            <input id="phonenumber" placeholder="Enter a phone number" th:field="*{phoneNumber}" type="text">
+            <input id="phonenumber" placeholder="Enter a phone number" th:field="*{phoneNumber}" type="text"
+                   class="form-control is-invalid">
+            <small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid-feedback border-danger"></small>
         </div>
         <button>Register</button>
     </form>

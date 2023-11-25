@@ -27,4 +27,6 @@ public interface UserService {
     UserActivationToken getActivationToken(String token);
 
     void deleteUsedToken(UserActivationToken activationToken);
+
+    AppUser findByEmail(String email);
 }

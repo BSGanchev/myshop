@@ -10,7 +10,7 @@ public class ActivationLinkCleanUp {
         this.userActivationService = userActivationService;
     }
 
-    @Scheduled(cron = "0 51 14 * * *")
+    @Scheduled(cron = "0 10 * * * *")
     public void cleanUp() {
         this.userActivationService.deleteObsoleteActivationToken();
     }

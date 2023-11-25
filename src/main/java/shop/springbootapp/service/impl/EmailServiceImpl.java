@@ -44,10 +44,10 @@ public class EmailServiceImpl implements EmailService {
         javaMailSender.send(mimeMessage);
     }
 
-    private String generateRegistrationEmailBody(String username, String activationToken) {
+    private String generateRegistrationEmailBody(String username, String activationLink) {
         Context context = new Context();
         context.setVariable("username", username);
-        context.setVariable("activationToken", activationToken);
+        context.setVariable("activationLink", activationLink);
 
 
         return templateEngine.process(EMAIL_TEMPLATE_LOCATION, context);

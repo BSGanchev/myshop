@@ -3,9 +3,11 @@ package shop.springbootapp.web;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import shop.springbootapp.model.dto.RegisterUserDTO;
@@ -26,7 +28,13 @@ public class UserController {
         this.userService = userService;
         this.modelMapper = modelMapper;
     }
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
 
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+
+        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+    }
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -49,6 +57,11 @@ public class UserController {
             redirectAttributes.addFlashAttribute("registerUserDTO", registerUserDTO);
             redirectAttributes.addFlashAttribute(MODEL_KEY_PREFIX + "registerUserDTO", bindingResult);
 
+            if (this.userService.findByEmail(registerUserDTO.getEmail()) != null) {
+                redirectAttributes.addFlashAttribute("userEmailExist", true);
+                redirectAttributes.addFlashAttribute(MODEL_KEY_PREFIX + "registerUserDTO", bindingResult);
+
+            }
             return "redirect:register";
         }
 
@@ -68,7 +81,7 @@ public class UserController {
         this.userService.setUserActive(appUser.getId());
         this.userService.deleteUsedToken(activationToken);
 
-        return "redirect:/";
+        return "redirect:login";
     }
 
 }

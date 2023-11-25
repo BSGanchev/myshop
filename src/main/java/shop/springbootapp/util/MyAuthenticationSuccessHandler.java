@@ -20,8 +20,6 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
 
         this.userService.changeLastLoginTime(authentication.getName());
 
-        this.userService.getCurrentUser(authentication.getName());
-
         setDefaultTargetUrl("/");
         super.onAuthenticationSuccess(request, response, authentication);
     }

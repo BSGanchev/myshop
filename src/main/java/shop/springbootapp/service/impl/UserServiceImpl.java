@@ -137,4 +137,9 @@ public class UserServiceImpl implements UserService {
     public void deleteUsedToken(UserActivationToken activationToken) {
         this.userActivationService.deleteUsedActivationToken(activationToken);
     }
+
+    @Override
+    public AppUser findByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElse(null);
+    }
 }
