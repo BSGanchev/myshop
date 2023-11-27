@@ -29,4 +29,6 @@ public interface UserService {
     void deleteUsedToken(UserActivationToken activationToken);
 
     AppUser findByEmail(String email);
+
+    void deleteUnusedRegistration();
 }

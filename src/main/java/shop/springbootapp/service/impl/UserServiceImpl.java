@@ -151,4 +151,9 @@ public class UserServiceImpl implements UserService {
     public AppUser findByEmail(String email) {
         return this.userRepository.findByEmail(email).orElse(null);
     }
+
+    @Override
+    public void deleteUnusedRegistration() {
+        this.userRepository.deleteUnusedAccounts();
+    }
 }

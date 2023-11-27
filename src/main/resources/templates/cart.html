@@ -11,10 +11,10 @@
 
 <div>
 
-    <div th:remove="tag" th:if="null == products || products.size <= 0">
+    <div th:remove="tag" th:if="${products == null || products.size() == 0}">
         <div>Количката е празна !</div>
     </div>
-    <table th:if="null != products && products.size > 0">
+    <table th:if="${products != null && products.size() != 0}">
         <thead>
         <td>Name</td>
         <td>Price</td>

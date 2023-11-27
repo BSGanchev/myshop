@@ -26,16 +26,16 @@ public class SessionCartUtil {
     public List<CartProductDTO> getAllProducts(HttpServletRequest request) {
         List<CartProductDTO> cartProducts = (List<CartProductDTO>) request.getSession().getAttribute(CART_PRODUCTS);
         if (Objects.isNull(cartProducts)) {
-            request.getSession().setAttribute("cartProducts", new ArrayList<>());
+            request.getSession().setAttribute(CART_PRODUCTS, new ArrayList<>());
         }
         cartProducts = (List<CartProductDTO>) request.getSession().getAttribute(CART_PRODUCTS);
         return cartProducts;
     }
 
-    public CartProductDTO getProductById(HttpServletRequest request, String id) {
+    public CartProductDTO getProductById(HttpServletRequest request, UUID id) {
         List<CartProductDTO> allSessionProducts = getAllProducts(request);
         return allSessionProducts.stream()
-                .filter(p -> p.getId().equals(UUID.fromString(id)))
+                .filter(p -> p.getId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
@@ -47,7 +47,7 @@ public class SessionCartUtil {
 
         ProductDTO productDto = productMapper.toDto(product);
 
-        CartProductDTO existingCartProduct = getProductById(request, productDto.getId().toString());
+        CartProductDTO existingCartProduct = getProductById(request, productDto.getId());
         if (Objects.isNull(existingCartProduct)) {
             getAllProducts(request).add(new CartProductDTO(productDto.getId(), productDto, 1));
         } else {

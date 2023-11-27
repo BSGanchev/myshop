@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,12 +23,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        return httpSecurity.authorizeHttpRequests(authorizeRequest -> {
-                    authorizeRequest.requestMatchers(new AntPathRequestMatcher("/cart/**")).permitAll();
-                }).authorizeHttpRequests(
+        return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(
                         authorizeRequest -> authorizeRequest
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                .requestMatchers("/cart/products/**").permitAll()
+                                .requestMatchers("/cart/**").permitAll()
                                 .requestMatchers("/", "/users/login", "/users/register", "/users/activation").permitAll()
                                 .requestMatchers("/owner").hasRole(RoleNameEnum.OWNER.name())
                                 .requestMatchers("/admin").hasRole(RoleNameEnum.ADMIN.name())
@@ -53,7 +53,6 @@ public class SecurityConfiguration {
                         httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
                                 .maximumSessions(1)
                                 .sessionRegistry(sessionRegistry()))
-
                 .build();
     }
 

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
->
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Login page</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link href="/css/login.css" rel="stylesheet">
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/common::head}">
+
 </head>
 <body>
+<header th:insert="~{fragments/common::header}"></header>
 <div class="container">
     <form th:action="@{/users/login}" th:method="POST">
         <div class="links">
@@ -35,7 +31,7 @@
             <div class="sign-in-btn-box">
                 <input class="sign-in-btn" type="submit" value="sign in">
                 <div class="buttons">
-                    <a class="btn" th:href="@{/users/register}">
+                    <a class="sign-in-btn" th:href="@{/users/register}">
                         <input class="sign-in-btn" type="button" value="register">
                     </a>
                 </div>

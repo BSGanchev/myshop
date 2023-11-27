@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
     <script src="/js/jquery-3.3.1.min.js"></script>
@@ -14,36 +15,7 @@
 
 <body>
 
-<header>
-    <input id="toggler" name="" type="checkbox">
-    <label class="fas fa-bars" for="toggler"></label>
-
-    <a class="logo" href="#">Piece of Beauty<span>.</span></a>
-    <nav class="navbar">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#products">Products</a>
-        <a href="#review">Review</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="icons">
-        <a>Hello
-            <th:block sec:authorize="isAuthenticated()">
-                <th:block sec:authentication='name'></th:block>
-            </th:block>
-        </a>
-        <a class="fas fa-heart" href="#"></a>
-        <a class="fas fa-shopping-cart" href="#"></a>
-        <th:block sec:authorize="!isAuthenticated()">
-            <a class="fas fa-sign-in" th:href="@{/users/login}"></a>
-        </th:block>
-        <th:block sec:authorize="isAuthenticated()">
-            <form th:action="@{/users/logout}" th:method="POST">
-                <button class="fas fa-sign-out" type="submit"></button>
-            </form>
-        </th:block>
-    </div>
+<header th:insert="~{fragments/common::header}">
 </header>
 <!-- home section -->
 <section class="home" id="home">
@@ -234,11 +206,10 @@
 </body>
 <script>
     $("body").on("click", ".cart-btn", function (e) {
-        console.log("211312");
-        var productId = $(this).data('id');
+        let productId = $(this).data('id');
 
         $.ajax({
-            url: `/cart/products/${productId}/add`,
+            url: `/cart/products/${productId}`,
             type: "POST",
             success: function (data) {
                 //TODO

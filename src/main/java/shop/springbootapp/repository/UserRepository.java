@@ -31,4 +31,9 @@ public interface UserRepository extends JpaRepository<AppUser, UUID> {
     @Transactional
     @Query("UPDATE AppUser u SET u.disabled = FALSE WHERE u.id = :id")
     void activateUser(@Param("id") UUID id);
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM users WHERE disabled = TRUE", nativeQuery = true)
+    void deleteUnusedAccounts();
+
 }

@@ -8,71 +8,47 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <title>Judge v2</title>
+    <title>APofB</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <link href="/css/register.css" rel="stylesheet">
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-xl navbar-light bg-light rounded">
-        <a class="navbar-brand" href="#">
-            <h3 class="tm-site-title mb-0">Piece of Beauty</h3>
-        </a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                class="navbar-toggler ml-auto mr-0" data-target="#navbarSupportedContent"
-                data-toggle="collapse" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <input id="toggler" name="" type="checkbox">
+    <label class="fas fa-bars" for="toggler"></label>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto">
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <th:block sec:authorize="hasRole('OWNER')">
-                        <a class="nav-link" th:href="@{/owner}">
-                            <div class="nav-item text-center">Hello
-                                <th:block sec:authentication='name'></th:block>
-                            </div>
-                        </a>
-                    </th:block>
-                    <th:block sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" th:href="@{/admin}">
-                            <div class="nav-item text-center">Hello
-                                <th:block sec:authentication='name'></th:block>
-                            </div>
-                        </a>
-                    </th:block>
-                    <th:block sec:authorize="hasRole('USER')">
-                        <a class="nav-link" th:href="@{/users}">
-                            <div class="nav-item text-center">Hello
-                                <th:block sec:authentication='name'></th:block>
-                            </div>
-                        </a>
-                    </th:block>
-                </li>
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link d-flex" th:href="@{/users/login}">
-                        <span>Login</span>
-                    </a>
-                </li>
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link d-flex" th:href="@{/users/register}">
-                        <span>Register</span>
-                    </a>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/users/logout}" th:method="POST">
-                        <input class="nav-link d-flex" type="submit" value="Logout">
-                    </form>
-                </li>
-            </ul>
-        </div>
+    <a class="logo" th:href="@{/}">Piece of Beauty<span>.</span></a>
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#review">Review</a>
+        <a href="#contact">Contact</a>
     </nav>
+
+    <div class="icons">
+        <a>Hello
+            <th:block sec:authorize="isAuthenticated()">
+                <th:block sec:authentication='name'></th:block>
+            </th:block>
+        </a>
+        <a class="fas fa-heart" href="#"></a>
+        <a class="fas fa-shopping-cart" th:href="@{/cart}"></a>
+        <th:block sec:authorize="!isAuthenticated()">
+            <a class="fas fa-sign-in" th:href="@{/users/login}"></a>
+        </th:block>
+        <th:block sec:authorize="isAuthenticated()">
+            <form th:action="@{/users/logout}" th:method="POST">
+                <button class="fas fa-sign-out" type="submit"></button>
+            </form>
+        </th:block>
+    </div>
 </header>
 
 </body>
