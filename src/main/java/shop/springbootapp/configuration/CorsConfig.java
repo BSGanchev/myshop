@@ -1,8 +1,9 @@
 package shop.springbootapp.configuration;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+@Configuration
 public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -10,6 +11,9 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/api/products/**")
                 .allowedOrigins("http://localhost:8080")
                 .allowedMethods("GET");
+        registry.addMapping("/orders/buy")
+                .allowedOrigins("http://localhost:8080")
+                .allowedMethods("POST");
         WebMvcConfigurer.super.addCorsMappings(registry);
     }
 }

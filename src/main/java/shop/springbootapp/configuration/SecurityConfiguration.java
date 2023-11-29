@@ -25,6 +25,7 @@ public class SecurityConfiguration {
                         authorizeRequest -> authorizeRequest
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 .requestMatchers("/api/products/**").permitAll()
+                                .requestMatchers("/orders/buy").permitAll()
                                 .requestMatchers("/", "/users/login", "/users/register", "/users/activation").permitAll()
                                 .requestMatchers("/owner").hasRole(RoleNameEnum.OWNER.name())
                                 .requestMatchers("/admin").hasRole(RoleNameEnum.ADMIN.name())

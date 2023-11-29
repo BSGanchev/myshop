@@ -64,8 +64,8 @@
 <!-- products section -->
 <section class="products" id="products">
     <h1 class="heading">Products <span>on discount </span></h1>
-    <div class="box-container" th:each="p : ${allProducts}" th:object="${p}" id="box-container">
-        <div class="box" id="product-details">
+    <div class="box-container"  id="box-container">
+        <div class="box" id="product-details"th:each="p : ${allProducts}" th:object="${p}" >
             <span class="discount">-15%</span>
             <div class="image">
                 <img alt="" th:src="*{pictureUrl}">

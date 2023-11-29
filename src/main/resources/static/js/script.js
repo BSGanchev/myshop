@@ -2,6 +2,8 @@
 let cartIcon = document.querySelector('.fa-shopping-cart');
 let cart = document.querySelector('#cart');
 let closeIcon = document.querySelector('.fa-times');
+let itemsAdded = [];
+let id;
 
 cartIcon.addEventListener("click", (e) => {
     cart.classList.add("active");
@@ -38,8 +40,7 @@ function update() {
 function addEvents() {
     // Remove items
     let cartRemove_btns = document.querySelectorAll('#cart-remove');
-    console.log(cartRemove_btns);
-    console.log(itemsAdded);
+
     cartRemove_btns.forEach(btn => {
         btn.addEventListener('click', handle_removeCardItem);
     });
@@ -63,44 +64,44 @@ function addEvents() {
 const buy_btn = document.querySelector('.btn-buy');
 buy_btn.addEventListener('click', handle_BuyOrder);
 
-//--------------------------handlers
-// buy Order fetch
+
+
 function handle_BuyOrder() {
     if (itemsAdded.length <= 0) {
         alert("The cart is empty!")
         return;
     }
-    const cartContent = cart.querySelector('#cart-content');
-    cartContent.innerHTML = '';
-
     const requestData = {
-        items: itemsAdded,
+        items: itemsAdded
+
     }
-    fetch('http://localhost:8080/cart/buyOut', {
-        method: 'POST', headers: {
-            'Content-Type': 'application/json',
-        }, body: JSON.stringify(requestData),
+    fetch('http://localhost:8080/orders/buy', {
+        method: 'POST',
+        mode: "no-cors",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
     })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to place order');
             }
-            return response.json();
-        })
-        .then(alert('order placed successfully'));
+            return JSON.parse(response);
+        }).catch(err => {
+        console.log(err)
+    });
 
+    handle_removeAll();
     itemsAdded = [];
     update();
 }
 
-
 function handle_removeCardItem() {
     this.parentElement.remove();
-    console.log('reomve');
-    console.log(this.parentElement.querySelector(".cart-product-title").innerHTML);
 
-    itemsAdded = itemsAdded.filter((el) =>
-        el.productName !== this.parentElement.querySelector(".cart-product-title").innerHTML);
+    itemsAdded = itemsAdded.filter((el) => el.productName !== this.parentElement.querySelector(".cart-product-title").innerHTML);
 
     update();
 }
@@ -113,49 +114,72 @@ function handle_changeItemQuality() {
     update();
 }
 
-let itemsAdded = [];
+function handle_removeAll() {
+    let cartBoxes = document.querySelectorAll('.cart-box');
+    let total = document.querySelectorAll('.total-price');
+    cartBoxes.forEach(box => {
+        box.remove();
+        total.innerHTML = 0;
+    });
+}
+
+
+function getAddBtnId() {
+    return new Promise(function (resolve) {
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('cart-btn')) {
+                const productId = event.target.getAttribute('value');
+
+                resolve(productId);
+                event.stopPropagation();
+
+            }
+        });
+    });
+}
 
 function handle_addCartItem() {
+    getAddBtnId().then(function (productId) {
 
-    let productId = document.getElementById('add-to-cart').getAttribute('value');
-    const apiUrl = `http://localhost:8080/api/products/${productId}`;
+        const apiUrl = `http://localhost:8080/api/products/${productId}`;
 
-    fetch(apiUrl)
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            if (itemsAdded.find(el => el.id === data.id)) {
-                alert('Already exist in cart');
-                return;
-            }
-            itemsAdded.push(data);
-            let cartBoxElement = CartBoxComponent(data.productName, data.price, data.pictureUrl);
-            let newNode = document.createElement('div');
-            newNode.classList.add('cart-box');
-            newNode.id = 'cart-box';
-            newNode.innerHTML = cartBoxElement;
-            const cartContent = cart.querySelector('.cart-content');
-            cartContent.appendChild(newNode);
-            update();
+        fetch(apiUrl)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                if (itemsAdded.find(el => el.id === data.id)) {
+                    alert('Already exist in cart');
+                    return;
+                }
 
-        })
-        .catch(error => {
-            console.error('Error fetching product details:', error);
-        });
-    update();
+                itemsAdded.push(data);
+                let cartBoxElement = CartBoxComponent(data.productName, data.price, data.pictureUrl);
+                let newNode = document.createElement('div');
+                newNode.classList.add('cart-box');
+                newNode.id = 'cart-box';
+                newNode.innerHTML = cartBoxElement;
+                const cartContent = cart.querySelector('.cart-content');
+                cartContent.appendChild(newNode);
+                update();
+
+            })
+            .catch(error => {
+                console.error('Error fetching product details:', error);
+            });
+        update();
+    });
 
 }
 
 function updateTotal() {
-    let cartBoxes = document.querySelectorAll('#cart-box');
-    console.log(cartBoxes);
-    const totalElement = cart.querySelector('#total-price');
+    let cartBoxes = document.querySelectorAll('.cart-box');
+    const totalElement = cart.querySelector('.total-price');
     let total = 0;
     cartBoxes.forEach(cartBox => {
-        let priceElement = cartBox.querySelector('#cart-price');
+        let priceElement = cartBox.querySelector('.cart-price');
         let price = parseFloat(priceElement.innerHTML);
-        let quantity = cartBox.querySelector('#cart-quantity').value;
+        let quantity = cartBox.querySelector('.cart-quantity').value;
 
         total += price * quantity;
 
