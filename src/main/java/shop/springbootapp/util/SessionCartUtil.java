@@ -47,9 +47,9 @@ public class SessionCartUtil {
 
         ProductDTO productDto = productMapper.toDto(product);
 
-        CartProductDTO existingCartProduct = getProductById(request, productDto.getId());
+        CartProductDTO existingCartProduct = getProductById(request, UUID.fromString(productDto.getId()));
         if (Objects.isNull(existingCartProduct)) {
-            getAllProducts(request).add(new CartProductDTO(productDto.getId(), productDto, 1));
+            getAllProducts(request).add(new CartProductDTO(UUID.fromString(productDto.getId()), productDto, 1));
         } else {
             existingCartProduct.increaseQuantity();
         }

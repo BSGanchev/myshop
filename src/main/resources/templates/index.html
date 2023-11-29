@@ -6,17 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-
+    <title>APofB</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
-    <script src="/js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
 
-<header th:insert="~{fragments/common::header}">
-</header>
+<header th:insert="~{fragments/common::header}"></header>
 <!-- home section -->
 <section class="home" id="home">
     <div class="content">
@@ -67,38 +64,20 @@
 <!-- products section -->
 <section class="products" id="products">
     <h1 class="heading">Products <span>on discount </span></h1>
-    <div class="box-container">
-        <div class="box">
+    <div class="box-container" th:each="p : ${allProducts}" th:object="${p}" id="box-container">
+        <div class="box" id="product-details">
             <span class="discount">-15%</span>
             <div class="image">
-                <img alt="" src="/images/christmas-ball-discount.jpg">
+                <img alt="" th:src="*{pictureUrl}">
                 <div class="icons">
                     <a class="fas fa-heart" href="#"></a>
-                    <a class="cart-btn" href="javascript:void(0)" data-id="48dd4919-2c54-4145-af84-4d103d07c46a">add to
-                        cart</a>
+                    <a class="cart-btn" th:value="*{id}" id="add-to-cart">Add to cart</a>
                     <a class="fas fa-share" href="#"></a>
                 </div>
             </div>
             <div class="content">
-                <h3>Christmas ball</h3>
-                <div class="price">BGN 12.99 <span>BGN 15.00</span></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-15%</span>
-            <div class="image">
-                <img alt="" src="/images/photo-album-discount.jpg">
-                <div class="icons">
-                    <a class="fas fa-heart" href="#"></a>
-                    <a class="cart-btn" href="javascript:void(0)" data-id="a241a6ae-a6c3-41ab-a952-3a9d22d72b5b">add to
-                        cart</a>
-                    <a class="fas fa-share" href="#"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Photo album</h3>
-                <div class="price">BGN 55.99 <span>BGN 60.00</span></div>
+                <h3 th:text="*{productName}">Christmas ball</h3>
+                <div class="price" th:text="*{price}"><span th:text="*{price*0.8}"></span></div>
             </div>
         </div>
     </div>
@@ -204,20 +183,6 @@
     </section>
 </footer>
 </body>
-<script>
-    $("body").on("click", ".cart-btn", function (e) {
-        let productId = $(this).data('id');
-
-        $.ajax({
-            url: `/cart/products/${productId}`,
-            type: "POST",
-            success: function (data) {
-                //TODO
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                //TODO
-            }
-        });
-    });
-</script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/script.js"></script>
 </html>

@@ -11,15 +11,13 @@
     <title>APofB</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/login.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
     <link href="/css/register.css" rel="stylesheet">
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
-<header>
+<header th:fragment="header">
     <input id="toggler" name="" type="checkbox">
     <label class="fas fa-bars" for="toggler"></label>
 
@@ -39,7 +37,42 @@
             </th:block>
         </a>
         <a class="fas fa-heart" href="#"></a>
-        <a class="fas fa-shopping-cart" th:href="@{/cart}"></a>
+        <!--        CART ICON-->
+        <a class="fas fa-shopping-cart">
+
+            <!-- CART -->
+            <div class="cart" id="cart">
+                <h2 class="cart-title">Your Cart</h2>
+
+                <!-- CONTENT -->
+                <div class="cart-content">
+
+                    <!-- TEST BOX -->
+                    <div class="cart-box">
+                        <img src="photo-album-discount.jpg" alt="" class="cart-img">
+                        <div class="detail-box">
+                            <div class="cart-product-title">FRAME</div>
+                            <div class="cart-price">75.99</div>
+                            <input type="number" value="1" min="0" class="cart-quantity">
+                        </div>
+                        <!-- REMOVE CART -->
+                        <i class='fa fa-trash' id="cart-remove"></i>
+                    </div>
+                </div>
+
+                <!-- TOTAL -->
+                <div class="total">
+                    <div class="total-title">Total</div>
+                    <div class="total-price">0</div>
+                </div>
+                <!-- BUY BUTTON -->
+                <button type="button" class="btn-buy">Buy now</button>
+                <!-- CART CLOSE -->
+                <i class='fa fa-times' id="cart-close"></i>
+            </div>
+
+
+        </a>
         <th:block sec:authorize="!isAuthenticated()">
             <a class="fas fa-sign-in" th:href="@{/users/login}"></a>
         </th:block>
