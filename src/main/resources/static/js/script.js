@@ -71,13 +71,16 @@ function handle_BuyOrder() {
         alert("The cart is empty!")
         return;
     }
+    // const ids = [];
+    // itemsAdded.forEach(({id}) => ids.push(id));
+
     const requestData = {
         items: itemsAdded
 
     }
     fetch('http://localhost:8080/orders/buy', {
         method: 'POST',
-        mode: "no-cors",
+        mode: "cors",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -88,7 +91,7 @@ function handle_BuyOrder() {
             if (!response.ok) {
                 throw new Error('Failed to place order');
             }
-            return JSON.parse(response);
+            return response.json();
         }).catch(err => {
         console.log(err)
     });
