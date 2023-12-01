@@ -536,6 +536,29 @@ header .fa-bars {
     color: var(--pink);
 }
 
+.products .box-container .box .small-images {
+    display: flex;
+    width: inherit;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding: 20px 40px;
+    margin: 10px;
+
+
+}
+.products .box-container .box .small-images img{
+    width: 20%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 10%;
+    padding: 0px 0px 0px 0px;
+
+
+}
+.products .box-container .box .small-images img:hover{
+    transform: scale(1.2);
+}
+
 /*cart*/
 #cart {
     position: fixed;
@@ -646,7 +669,66 @@ header .fa-bars {
     color: var(--text-color);
     cursor: pointer;
 }
+.description .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5%;
+}
 
+
+.description .box-container .box {
+    flex: 1 1 30rem;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    border-radius: .5rem;
+    border: .1rem solid rgba(0, 0, 0, .1);
+    padding: 3rem 2rem;
+    position: relative;
+}
+
+.description .box-container .box .fa-quote-right {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    font-size: 6rem;
+    color: #eee;
+}
+
+.description .box-container .box .stars i {
+    color: var(--pink);
+    font-size: 2rem;
+
+}
+
+.description .box-container .box p {
+    color: #999;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    padding-top: 2rem;
+}
+
+.description .box-container .box .user {
+    display: var(--pink);
+    align-items: center;
+    padding-top: 2rem;
+}
+
+.description .box-container .box .user img {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.description .box-container .box .user h3 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.description .box-container .box .user span {
+    font-size: 1.5rem;
+    color: #999;
+}
 
 /* queries */
 

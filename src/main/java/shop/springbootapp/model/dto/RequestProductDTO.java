@@ -1,10 +1,6 @@
 package shop.springbootapp.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import shop.springbootapp.model.entity.ProductType;
 
 import java.math.BigDecimal;

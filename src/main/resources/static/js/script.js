@@ -53,12 +53,11 @@ function addEvents() {
     })
 
     // Add to cart
-    let addCart_btn = document.querySelectorAll('#add-to-cart');
+    let addCart_btn = document.querySelectorAll('.cart-btn');
     addCart_btn.forEach(btn => {
         btn.addEventListener('click', handle_addCartItem);
     })
 }
-
 // Buy order
 
 const buy_btn = document.querySelector('.btn-buy');
@@ -71,8 +70,7 @@ function handle_BuyOrder() {
         alert("The cart is empty!")
         return;
     }
-    // const ids = [];
-    // itemsAdded.forEach(({id}) => ids.push(id));
+
 
     const requestData = {
         items: itemsAdded
@@ -98,15 +96,20 @@ function handle_BuyOrder() {
 
     handle_removeAll();
     itemsAdded = [];
+    let total = cart.querySelector('.total-price');
+    total.innerHTML = 0.00.toFixed(2);
     update();
 }
 
 function handle_removeCardItem() {
     this.parentElement.remove();
-
-    itemsAdded = itemsAdded.filter((el) => el.productName !== this.parentElement.querySelector(".cart-product-title").innerHTML);
+    itemsAdded = itemsAdded.filter((el) =>
+        el.productName !== this.parentElement.querySelector(".cart-product-title")
+            .innerHTML);
 
     update();
+    cart.classList.remove("active");
+
 }
 
 function handle_changeItemQuality() {
@@ -122,7 +125,7 @@ function handle_removeAll() {
     let total = document.querySelectorAll('.total-price');
     cartBoxes.forEach(box => {
         box.remove();
-        total.innerHTML = 0;
+        total.innerHTML = 0.00.toFixed(2);
     });
 }
 
@@ -144,7 +147,7 @@ function getAddBtnId() {
 function handle_addCartItem() {
     getAddBtnId().then(function (productId) {
 
-        const apiUrl = `http://localhost:8080/api/products/${productId}`;
+        const apiUrl = `http://localhost:8080/products/${productId}`;
 
         fetch(apiUrl)
             .then(response => {
@@ -170,6 +173,7 @@ function handle_addCartItem() {
             .catch(error => {
                 console.error('Error fetching product details:', error);
             });
+        cart.classList.add("active");
         update();
     });
 
@@ -179,12 +183,18 @@ function updateTotal() {
     let cartBoxes = document.querySelectorAll('.cart-box');
     const totalElement = cart.querySelector('.total-price');
     let total = 0;
+    if (cartBoxes.length === 0) {
+        total = 0;
+        totalElement.innerHTML = total.toFixed(2);
+        return;
+    }
+
     cartBoxes.forEach(cartBox => {
         let priceElement = cartBox.querySelector('.cart-price');
         let price = parseFloat(priceElement.innerHTML);
-        let quantity = cartBox.querySelector('.cart-quantity').value;
+        // let quantity = cartBox.querySelector('.cart-quantity').value;
 
-        total += price * quantity;
+        total += price;
 
         totalElement.innerHTML = total.toFixed(2);
     })
@@ -199,8 +209,21 @@ function CartBoxComponent(title, price, pictureUrl) {
                 <div class="detail-box">
                     <div class="cart-product-title">${title}</div>
                     <div class="cart-price" id="cart-price">${price}</div>
-                    <input type="number" value="1" min="0" class="cart-quantity" id="cart-quantity">
+                    <input hidden="hidden" type="number" value="1" min="0" class="cart-quantity" id="cart-quantity">
                     </div>
                 <i class='fa fa-trash' id="cart-remove"></i>
             `
+}
+
+// product page picture change
+let bigImg = document.querySelector('.image img');
+console.log(bigImg.src);
+let smallImage = document.querySelectorAll('.small-images img');
+
+smallImage.forEach(img => {
+    img.addEventListener('click', showImage);
+});
+
+function showImage() {
+    bigImg.src = this.src;
 }

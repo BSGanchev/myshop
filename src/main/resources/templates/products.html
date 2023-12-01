@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/register.css">
+
+</head>
+
+<body>
+
+<header th:insert="~{fragments/common::header}">
+  <nav th:insert="~{fragments/common::nav}"></nav>
+</header>
+
+<section class="products" id="products">
+  <!-- heading -->
+  <h1 class="heading">All <span>products</span></h1>
+  <div class="box-container">
+    <div class="box">
+      <span class="discount"></span>
+      <!-- main image with add to cart-->
+      <div class="image">
+        <img src="4.jpg" alt="">
+        <div class="icons">
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="cart-btn" id="add-to-cart" th:value="*{id}">add to cart</a>
+          <a href="#" class="fas fa-share"></a>
+        </div>
+      </div>
+      <div class="content">
+        <h3>Christmas ball</h3>
+        <div class="price">BGN 12.99 <span>BGN 15.00</span></div>
+      </div>
+      <!-- small images -->
+
+      <div class="small-images">
+        <img src="2.png">
+        <img src="3.png">
+        <img src="1.png">
+      </div>
+      <!-- description -->
+      <div class="description">
+
+        <h1 class="heading"> Description <span>:</span></h1>
+        <div class="box-container">
+          <div class="box">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos laborum,
+              recusandae
+              necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere
+              dicta
+              debitis
+              voluptate natus nisi commodi.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/js/script.js"></script>
+</body>
+</html>
