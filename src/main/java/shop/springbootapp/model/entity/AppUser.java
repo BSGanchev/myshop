@@ -35,7 +35,7 @@ public class AppUser extends BaseEntity {
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            inverseJoinColumns = @JoinColumn(name = "id")
     )
     private Set<Role> roles;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

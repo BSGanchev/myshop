@@ -199,6 +199,10 @@ td img {
 
     vertical-align: middle;
 }
+td a{
+    display: flex;
+    justify-content: start;
+}
 
 table, th, td {
     border-collapse: collapse;

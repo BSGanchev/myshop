@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(String id) {
-        if (id != null || id.trim().isEmpty()) {
+        if (id == null || id.trim().isBlank()) {
             throw new ProductNotFoundException("Product not found");
         }
         return productRepository.findById(UUID.fromString(id)).orElse(null);

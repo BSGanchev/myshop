@@ -27,7 +27,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("/products/**").permitAll()
                                 .requestMatchers("/api/orders/**").permitAll()
                                 .requestMatchers("/", "/users/login", "/users/register", "/users/activation", "/users/login-error").permitAll()
-                                .requestMatchers("/owner/**").hasRole(RoleNameEnum.OWNER.name())
+                                .requestMatchers("/owner/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole(RoleNameEnum.ADMIN.name())
                                 .anyRequest().authenticated()
                 ).formLogin(

@@ -36,6 +36,7 @@ public class ProductController {
         if (Objects.isNull(product)) {
             throw new ProductNotFoundException("Product cannot be found ! ID: " + id);
         }
+        System.out.println(product);
         return ResponseEntity.ok(product);
     }
 

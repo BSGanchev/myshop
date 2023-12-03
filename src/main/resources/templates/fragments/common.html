@@ -33,14 +33,14 @@
             <a th:href="@{/products/all}">Products</a>
         </th:block>
         <th:block sec:authorize="!isAuthenticated()">
-            <a href="#products">Products</a>
+            <a th:href="@{/#products}">Products</a>
         </th:block>
         <a th:href="@{/#review}">Review</a>
         <a th:href="@{/#contact}">Contact</a>
         <th:block sec:authorize="hasRole('OWNER')">
             <a th:href="@{/owner/orders}">Owner</a>
         </th:block>
-        <th:block sec:authorize="hasRole('OWNER')">
+        <th:block sec:authorize="hasRole('ADMIN')">
             <a th:href="@{/admin/orders}">Admin</a>
         </th:block>
     </nav>

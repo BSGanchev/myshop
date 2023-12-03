@@ -67,7 +67,6 @@ function handleCart(){
     updateTotal();
 }
 function renderCart(){
-    if(itemsAdded.length != null) {
         itemsAdded.forEach(item => {
             let boxElement = CartBoxComponent(item.productName, item.price, item.pictureUrl);
             let newNode = document.createElement('div');
@@ -77,7 +76,6 @@ function renderCart(){
             const cartContent = cart.querySelector('.cart-content');
             cartContent.appendChild(newNode);
         })
-    }
 }
 function saveCart(){
     localStorage.setItem("cart", JSON.stringify(itemsAdded));
@@ -139,8 +137,7 @@ function handle_removeCardItem() {
             .innerHTML);
 
     update();
-    cart.classList.remove("active");
-    saveCart();
+    handleCart();
 
 }
 
@@ -169,6 +166,7 @@ function getAddBtnId() {
         document.addEventListener('click', function (event) {
             if (event.target.classList.contains('cart-btn')) {
                 const productId = event.target.getAttribute('value');
+                console.log(productId);
 
                 resolve(productId);
                 event.stopPropagation();
