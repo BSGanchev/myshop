@@ -20,7 +20,7 @@ public interface UserService {
 
     void registerUser(UserServiceModel userServiceModel);
 
-    AppUser getCurrentUser(String name);
+    AppUser getCurrentUser();
 
     void setUserActive(UUID id);
 

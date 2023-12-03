@@ -1,9 +1,6 @@
 package shop.springbootapp.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -12,7 +9,8 @@ import java.util.List;
 public class Order extends BaseEntity {
     @OneToMany
     private List<Product> products;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private AppUser buyer;
 
     public Order() {
@@ -32,5 +30,13 @@ public class Order extends BaseEntity {
 
     public void setBuyer(AppUser buyer) {
         this.buyer = buyer;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "products=" + products +
+                ", buyer=" + buyer +
+                '}';
     }
 }

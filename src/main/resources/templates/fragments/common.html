@@ -9,6 +9,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>APofB</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
     <link href="/css/login.css" rel="stylesheet">
@@ -30,10 +32,16 @@
             <a th:href="@{/products/all}">Products</a>
         </th:block>
         <th:block sec:authorize="!isAuthenticated()">
-        <a href="#products">Products</a>
+            <a href="#products">Products</a>
         </th:block>
         <a th:href="@{/#review}">Review</a>
         <a th:href="@{/#contact}">Contact</a>
+        <th:block sec:authorize="hasRole('OWNER')">
+            <a th:href="@{/owner/orders}">Owner</a>
+        </th:block>
+        <th:block sec:authorize="hasRole('OWNER')">
+            <a th:href="@{/admin/orders}">Admin</a>
+        </th:block>
     </nav>
 
     <div class="icons">
@@ -44,8 +52,7 @@
         </a>
         <a class="fas fa-heart" href="#"></a>
         <!--        CART ICON-->
-        <th:block sec:authorize="isAuthenticated()">
-            <a class="fas fa-shopping-cart" id="fa-shopping-cart-logged">
+        <a class="fas fa-shopping-cart" id="fa-shopping-cart-logged">
             <!-- CART -->
             <div class="cart" id="cart">
                 <h2 class="cart-title">Your Cart</h2>
@@ -58,12 +65,13 @@
                     <div class="total-price">0.00</div>
                 </div>
                 <!-- BUY BUTTON -->
-                <button type="button" class="btn-buy">Buy now</button>
+                <th:block sec:authorize="isAuthenticated()">
+                    <button type="button" class="btn-buy">Buy now</button>
+                </th:block>
                 <!-- CART CLOSE -->
                 <i class='fa fa-times' id="cart-close"></i>
             </div>
         </a>
-        </th:block>
         <th:block sec:authorize="!isAuthenticated()">
             <a class="fas fa-sign-in" th:href="@{/users/login}"></a>
         </th:block>

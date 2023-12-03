@@ -6,7 +6,6 @@ import shop.springbootapp.model.dto.ProductDTO;
 import shop.springbootapp.model.entity.Product;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
 public class ProductMapper {

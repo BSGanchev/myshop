@@ -37,7 +37,7 @@ body {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
 }
 
-.container header {
+.container .registration-header {
     font-size: 17px;
     padding-bottom: 25px;
     color: #fff;

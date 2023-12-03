@@ -24,20 +24,20 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authorizeRequest -> authorizeRequest
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                .requestMatchers("/api/products/**").permitAll()
-                                .requestMatchers("/orders/buy").permitAll()
-                                .requestMatchers("/", "/users/login", "/users/register", "/users/activation").permitAll()
-                                .requestMatchers("/owner").hasRole(RoleNameEnum.OWNER.name())
-                                .requestMatchers("/admin").hasRole(RoleNameEnum.ADMIN.name())
+                                .requestMatchers("/products/**").permitAll()
+                                .requestMatchers("/api/orders/**").permitAll()
+                                .requestMatchers("/", "/users/login", "/users/register", "/users/activation", "/users/login-error").permitAll()
+                                .requestMatchers("/owner/**").hasRole(RoleNameEnum.OWNER.name())
+                                .requestMatchers("/admin/**").hasRole(RoleNameEnum.ADMIN.name())
                                 .anyRequest().authenticated()
                 ).formLogin(
                         formLogin -> formLogin
                                 .loginPage("/users/login")
                                 .usernameParameter("username")
                                 .passwordParameter("password")
+                                .failureForwardUrl("/users/login-error")
                                 .defaultSuccessUrl("/")
                                 .successHandler(myAuthenticationSuccessHandler())
-                                .failureForwardUrl("/users/error?continue")
                 ).logout(
                         logout -> logout
                                 .logoutUrl("/users/logout")

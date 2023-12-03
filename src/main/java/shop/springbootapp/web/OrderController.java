@@ -2,8 +2,8 @@ package shop.springbootapp.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +24,14 @@ public class OrderController {
         this.productService = productService;
     }
     @PostMapping(value = "/buy")
-    public ResponseEntity<String> placeOrder(@RequestBody String request) throws JsonProcessingException {
+    public HttpStatus createOrder(@RequestBody String request) throws JsonProcessingException {
 
+        System.out.println(request);
         ObjectMapper objectMapper = new ObjectMapper();
         OrderRequestDTO orderRequestDTO = objectMapper.readValue(request, OrderRequestDTO.class);
+        this.orderService.createOrder(orderRequestDTO);
 
-        orderRequestDTO.getProducts().forEach(System.out::println);
-
-        return ResponseEntity.ok("Successfully added order");
+        return HttpStatus.CREATED;
     }
 
 }

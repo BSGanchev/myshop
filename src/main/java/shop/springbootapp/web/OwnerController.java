@@ -4,10 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import shop.springbootapp.service.ProductService;
 import shop.springbootapp.service.UserService;
 
 @Controller
+@RequestMapping("/owner")
 public class OwnerController {
     private final UserService userService;
     private final ModelMapper modelMapper;
@@ -19,11 +21,11 @@ public class OwnerController {
         this.productService = productService;
     }
 
-    @GetMapping("/owner")
+    @GetMapping("/orders")
     public String ownerPage(Model model) {
         if (!model.containsAttribute("products")) {
             model.addAttribute("products", this.productService.getALlProducts());
         }
-        return "owner-page";
+        return "orders";
     }
 }

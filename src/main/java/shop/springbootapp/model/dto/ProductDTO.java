@@ -1,10 +1,8 @@
 package shop.springbootapp.model.dto;
 
-import shop.springbootapp.model.entity.ProductType;
 import shop.springbootapp.model.enums.ProductTypeEnum;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 
 public class ProductDTO {

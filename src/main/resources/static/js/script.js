@@ -5,6 +5,7 @@ let closeIcon = document.querySelector('.fa-times');
 let itemsAdded = [];
 let id;
 
+
 cartIcon.addEventListener("click", (e) => {
     cart.classList.add("active");
     e.stopPropagation();
@@ -25,8 +26,9 @@ if (document.readyState === "loading") {
 
 // start
 function start() {
-    addEvents();
     handleCart();
+    addEvents();
+
 }
 
 // Update and render
@@ -78,10 +80,10 @@ function renderCart(){
     }
 }
 function saveCart(){
-    sessionStorage.setItem("cart", JSON.stringify(itemsAdded));
+    localStorage.setItem("cart", JSON.stringify(itemsAdded));
 }
 function loadCart(){
-    let cartJSON = sessionStorage.getItem("cart");
+    let cartJSON = localStorage.getItem("cart");
     itemsAdded = cartJSON ? JSON.parse(cartJSON) : [];
 }
 
@@ -192,6 +194,7 @@ function handle_addCartItem() {
                 }
 
                 itemsAdded.push(data);
+                saveCart();
                 let cartBoxElement = CartBoxComponent(data.productName, data.price, data.pictureUrl);
                 let newNode = document.createElement('div');
                 newNode.classList.add('cart-box');
@@ -207,7 +210,7 @@ function handle_addCartItem() {
             });
         cart.classList.add("active");
         update();
-        saveCart();
+
     });
 
 }

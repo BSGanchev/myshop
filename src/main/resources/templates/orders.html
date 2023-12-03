@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APofB</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/reset-css.css">
+  <link rel="stylesheet" href="/css/orders.css">
+
+</head>
+<body>
+<header th:insert="~{fragments/common::header}">
+</header>
+<main class="table">
+  <section class="table-header">
+    <h1>Customer's order</h1>
+  </section>
+  <section class="table-body">
+    <table>
+      <thead>
+      <tr>
+        <th> id </th>
+        <th> Customer </th>
+        <th> Location </th>
+        <th> Order date </th>
+        <th> Status </th>
+        <th> Ammount </th>
+        <th> Send </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td> 48dd4919-2c54-4145-af84-4d103d07c46a </td>
+        <td><img src="user.png">John Doe</td>
+        <td> Varna </td>
+        <td> 02 Dec, 2023 </td>
+        <td><p class="status delivered">Delivered</p></td>
+        <td><strong> 200лв. </strong></td>
+        <td><input class="done-btn"  type="button" value="Done"></td>
+      </tr>
+      <tr>
+        <td> 48dd4919-2c54-4145-af84-4d103d07c46a </td>
+        <td><img src="user.png">Ossama Ben Ladden</td>
+        <td> Varna </td>
+        <td> 02 Dec, 2023 </td>
+        <td><p class="status cancelled">Canceled</p></td>
+        <td><strong> 200лв. </strong></td>
+        <td><input class="done-btn" type="button" value="Done"></td>
+      </tr>
+      <tr>
+        <td> 48dd4919-2c54-4145-af84-4d103d07c46a </td>
+        <td><img src="user.png">Santa claus</td>
+        <td> Varna </td>
+        <td> 02 Dec, 2023 </td>
+        <td><p class="status pending">Pending</p></td>
+        <td><strong> 200лв. </strong></td>
+        <td><input class="done-btn" type="button" value="Done"></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+</body>
+</html>

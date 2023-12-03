@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AppUser findByUsername(String username) {
-        return null;
+        return this.userRepository.findByUsername(username).orElse(null);
     }
 
     @Override
@@ -121,11 +121,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AppUser getCurrentUser(String name) {
-        AppUser appUser = this.userRepository.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("Not found!"));
+    public AppUser getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
 
-        System.out.println(authentication.toString());
+        AppUser appUser = this.userRepository.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("User with name "+ name +" not found!"));
+
 
         return appUser;
     }
@@ -156,4 +157,5 @@ public class UserServiceImpl implements UserService {
     public void deleteUnusedRegistration() {
         this.userRepository.deleteUnusedAccounts();
     }
+
 }

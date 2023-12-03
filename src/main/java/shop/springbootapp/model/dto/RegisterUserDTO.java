@@ -1,6 +1,5 @@
 package shop.springbootapp.model.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -9,20 +8,25 @@ import shop.springbootapp.validation.PasswordValidator;
 
 @PasswordValidator(password = "password", confirmPassword = "confirmPassword")
 public class RegisterUserDTO {
-    @NotNull(message = "Enter a valid username")
+    @NotNull(message = "Enter username")
     @Size(min = 3, message = "Username must contains minimum 3 character")
     @Size(max = 20, message = "Username must contains maximum 20 character")
     @Pattern(regexp = "^[a-zA-Z0-9]+$",
     message = "Username must contains letters and number only")
     private String username;
+    @NotNull(message = "Enter password")
     @Size(min = 3, max = 15, message = "Password must be in 3 to 15 character range")
     private String password;
     private String firstName;
     private String lastName;
+    @NotNull(message = "Confirm password")
     @Size(min = 3, max = 15, message = "Password must be in 3 to 15 character range")
     private String confirmPassword;
+    @NotNull(message = "Enter email")
     @Email(message = "Please enter a valid email address")
     private String email;
+
+    @NotNull(message = "Enter a phone number")
     @Size(min = 10, max = 10)
     @Pattern(regexp = "^[a-zA-Z0-9]{10}$", message = "Please enter a valid phone number")
     private String phoneNumber;

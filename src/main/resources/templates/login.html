@@ -28,6 +28,9 @@
                 <span class="fa-solid fa-key"></span>
                 <input id="password" name="password" placeholder="password" type="password">
             </div>
+            <p th:if="${bad_credentials}" class="errors alert alert-danger">
+                Invalid username or password.
+            </p>
             <div class="sign-in-btn-box">
                 <input class="sign-in-btn" type="submit" value="sign in">
                 <div class="buttons">
