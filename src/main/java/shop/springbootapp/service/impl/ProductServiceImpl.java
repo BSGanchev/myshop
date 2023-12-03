@@ -7,6 +7,7 @@ import shop.springbootapp.model.enums.ProductTypeEnum;
 import shop.springbootapp.repository.ProductRepository;
 import shop.springbootapp.repository.ProductTypeRepository;
 import shop.springbootapp.service.ProductService;
+import shop.springbootapp.service.exception.ProductNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -55,10 +56,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(String id) {
-        if (!StringUtils.hasText(id)) {
-            return null;
+        if (id != null || id.trim().isEmpty()) {
+            throw new ProductNotFoundException("Product not found");
         }
-
         return productRepository.findById(UUID.fromString(id)).orElse(null);
     }
 }

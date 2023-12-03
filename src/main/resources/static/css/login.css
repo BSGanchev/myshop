@@ -38,6 +38,13 @@
     overflow: hidden;
     text-align: center;
 }
+.container form span {
+    font-size: 15px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
+    border: var(--border);
+    border-radius: 2px;
+    padding: 8px 15px;
+}
 
 .container form .links {
     background: #fff;
@@ -51,16 +58,16 @@
 }
 
 .container form .links .buttons .btn {
-    display: inline-block;
-    margin: 5px;
-    border: var(--border);
-    border-radius: 5px;
-    background: var(--pink);
-    color: #fff;
-    padding: 10px 30px;
-    cursor: pointer;
-    font-size: 17px;
-    transition: .2s linear;
+    display: inline-block;!important;
+    margin: 5px;!important;
+    border: var(--border);!important;
+    border-radius: 5px;!important;
+    background: var(--pink);!important;
+    color: #fff;!important;
+    padding: 10px 30px;!important;
+    cursor: pointer;!important;
+    font-size: 17px;!important;
+    transition: .2s linear;!important;
 
 }
 
@@ -113,25 +120,25 @@
 }
 
 .container form .sign-in-btn-box {
-    display: inline-flex;
-    align-items: first baseline;
-    gap: 25px;
-    flex-wrap: wrap;
-    padding-bottom: 20%;
+    display: inline-flex;!important;
+    align-items: first baseline;!important;
+    gap: 25px;!important;
+    flex-wrap: wrap;!important;
+    padding-bottom: 20%;!important;
 }
 
 .container form .sign-in-btn {
-    padding: 10px 40px;
-    margin-top: 10px;
-    font-size: 17px;
-    color: #fff;
-    border-radius: 5px;
-    background: var(--pink);
-    cursor: pointer;
-    transition: .2s linear;
-    flex-grow: 1;
+    padding: 10px 40px;!important;
+    margin-top: 10px;!important;
+    font-size: 17px;!important;
+    color: #fff;!important;
+    border-radius: 5px;!important;
+    background: var(--pink);!important;
+    cursor: pointer;!important;
+    transition: .2s linear;!important;
+    flex-grow: 1;!important;
 }
 
 .container form .sign-in-btn:hover {
-    letter-spacing: 2px;
+    letter-spacing: 2px;!important;
 }
