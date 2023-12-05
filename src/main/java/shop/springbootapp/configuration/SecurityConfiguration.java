@@ -24,12 +24,13 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         authorizeRequest -> authorizeRequest
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                .requestMatchers("/products/**").permitAll()
-                                .requestMatchers("/api/orders/**").permitAll()
-                                .requestMatchers("/", "/users/login", "/users/register", "/users/activation", "/users/login-error").permitAll()
-                                .requestMatchers("/owner/**").permitAll()
-                                .requestMatchers("/admin/**").hasRole(RoleNameEnum.ADMIN.name())
-                                .anyRequest().authenticated()
+//                                .requestMatchers("/products/**").permitAll()
+//                                .requestMatchers("/api/orders/**").permitAll()
+//                                .requestMatchers("/", "/users/login", "/users/register", "/users/activation", "/users/login-error").permitAll()
+//                                .requestMatchers("/requestpart/product-add").permitAll()
+//                                .requestMatchers("/admin/**").hasRole(RoleNameEnum.ADMIN.name())
+
+                                .anyRequest().permitAll()
                 ).formLogin(
                         formLogin -> formLogin
                                 .loginPage("/users/login")

@@ -21,7 +21,6 @@ public class ProductMapper {
         dto.setType(entity.getType().getProductTypeName());
         dto.setProductName(entity.getProductName());
         dto.setPrice(entity.getPrice());
-        dto.setPictureUrl(entity.getPictureUrl());
         return dto;
     }
 }

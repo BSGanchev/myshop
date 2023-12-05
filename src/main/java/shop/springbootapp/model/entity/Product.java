@@ -1,9 +1,6 @@
 package shop.springbootapp.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
@@ -20,8 +17,9 @@ public class Product extends BaseEntity {
     @Positive
     @Column(nullable = false)
     private BigDecimal price;
-    @NotNull
-    private String pictureUrl;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "picture")
+    private Picture picture;
     @NotNull
     private String description;
 
@@ -52,12 +50,12 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public Picture getPicture() {
+        return picture;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     public String getDescription() {
@@ -74,7 +72,7 @@ public class Product extends BaseEntity {
                 "productName='" + productName + '\'' +
                 ", type=" + type +
                 ", price=" + price +
-                ", pictureUrl='" + pictureUrl + '\'' +
+                ", picture=" + picture +
                 ", description='" + description + '\'' +
                 '}';
     }

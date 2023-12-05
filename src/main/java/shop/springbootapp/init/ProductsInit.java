@@ -19,7 +19,6 @@ public class ProductsInit implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         this.productTypeService.initProductTypes();
-        this.productService.initProducts();
 
     }
 }

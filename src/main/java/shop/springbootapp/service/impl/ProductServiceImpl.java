@@ -1,8 +1,11 @@
 package shop.springbootapp.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import shop.springbootapp.model.dto.AddProductDTO;
+import shop.springbootapp.model.entity.Picture;
 import shop.springbootapp.model.entity.Product;
+import shop.springbootapp.model.entity.ProductType;
 import shop.springbootapp.model.enums.ProductTypeEnum;
 import shop.springbootapp.repository.ProductRepository;
 import shop.springbootapp.repository.ProductTypeRepository;
@@ -18,7 +21,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductTypeRepository productTypeRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository, ProductTypeRepository productTypeRepository) {
+    public ProductServiceImpl(ProductRepository productRepository,
+                              ProductTypeRepository productTypeRepository) {
         this.productRepository = productRepository;
         this.productTypeRepository = productTypeRepository;
     }
@@ -28,25 +32,6 @@ public class ProductServiceImpl implements ProductService {
         if (this.productRepository.count() != 0) {
             return;
         }
-        Product product = new Product();
-        product.setProductName("Purple Baby Frame");
-        product.setPrice(BigDecimal.valueOf(12.99));
-        product.setType(productTypeRepository
-                .findProductTypeByProductTypeName(ProductTypeEnum.Baby_Frame)
-                .orElse(null));
-        product.setPictureUrl("https://m.media-amazon.com/images/I/613MGDH4PDL.jpg");
-        product.setDescription("Amazing baby frame!!!");
-        this.productRepository.save(product);
-
-        Product product1 = new Product();
-        product1.setProductName("Black Baby Frame");
-        product1.setPrice(BigDecimal.valueOf(12.99));
-        product1.setType(productTypeRepository
-                .findProductTypeByProductTypeName(ProductTypeEnum.Baby_Frame)
-                .orElse(null));
-        product1.setPictureUrl("https://m.media-amazon.com/images/I/613MGDH4PDL.jpg");
-        product1.setDescription("Other Amazing baby frame!!!");
-        this.productRepository.save(product1);
     }
 
     @Override
@@ -61,4 +46,28 @@ public class ProductServiceImpl implements ProductService {
         }
         return productRepository.findById(UUID.fromString(id)).orElse(null);
     }
+
+    @Override
+    public UUID addProduct(Product product) {
+        ModelMapper modelMapper = new ModelMapper();
+
+        return this.productRepository.save(product).getId();
+    }
+
+    @Override
+    public void addProduct(AddProductDTO addProductDTO, Picture picture) {
+        ModelMapper modelMapper = new ModelMapper();
+
+        Product product = modelMapper.map(addProductDTO, Product.class);
+        product.setPicture(picture);
+
+        ProductType productType = this.productTypeRepository.findAll().stream()
+                .filter(e -> e.getProductTypeName().name().contains(addProductDTO.getType()))
+                .findFirst().get();
+
+        product.setType(productType);
+        this.productRepository.save(product);
+    }
+
+
 }

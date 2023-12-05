@@ -68,7 +68,7 @@
         <div class="box" id="product-details"th:each="p : ${allProducts}" th:object="${p}" >
             <span class="discount">-15%</span>
             <div class="image">
-                <img alt="" th:src="*{pictureUrl}">
+                <img th:src="'data:' + ${p.picture.contentType} + ';base64,' + ${p.picture.getEncodedContent()}" alt="">
                 <div class="icons">
                     <a class="fas fa-heart" href="#"></a>
                     <a class="cart-btn" th:value="*{id}" id="add-to-cart">Add to cart</a>

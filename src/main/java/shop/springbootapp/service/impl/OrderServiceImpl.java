@@ -1,8 +1,6 @@
 package shop.springbootapp.service.impl;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import shop.springbootapp.model.dto.OrderRequestDTO;
@@ -16,10 +14,8 @@ import shop.springbootapp.service.UserService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
