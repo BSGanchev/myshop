@@ -2,30 +2,23 @@ package shop.springbootapp.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import shop.springbootapp.model.dto.AddProductDTO;
+import shop.springbootapp.model.dto.ProductDTO;
 import shop.springbootapp.model.entity.Order;
 import shop.springbootapp.model.entity.Picture;
-import shop.springbootapp.model.entity.Product;
-import shop.springbootapp.model.entity.ProductDTO;
-import shop.springbootapp.repository.PictureRepository;
 import shop.springbootapp.service.OrderService;
 import shop.springbootapp.service.ProductService;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/owner")
@@ -33,8 +26,6 @@ public class OwnerController {
 
     private final OrderService orderService;
     private final ProductService productService;
-    @Autowired
-    PictureRepository pictureRepository;
 
     public OwnerController(OrderService orderService, ProductService productService) {
         this.orderService = orderService;
@@ -53,28 +44,64 @@ public class OwnerController {
         return "orders";
     }
     @GetMapping("/product-add")
-    public String addProduct(@ModelAttribute("addProductDTO") AddProductDTO addProductDTO){
+    public String addProduct(@ModelAttribute("addProductDTO") ProductDTO productDTO){
 
         return "/product-add";
     }
 
-    @RequestMapping(path = "/product-add", method = POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String addProductConfirm(@ModelAttribute @Valid AddProductDTO addProductDTO,
+    @PostMapping(path = "/product-add", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String addProductConfirm(@ModelAttribute @Valid ProductDTO productDTO,
                                                     @RequestParam("picture") MultipartFile file,
                                                     HttpServletRequest request) throws IOException {
-
 
         Picture picture = createPictureFromMultipart(file);
         request.getSession().removeAttribute("picture");
 
-
-        addProductDTO.getType();
-
-        this.productService.addProduct(addProductDTO, picture);
+        this.productService.addProduct(productDTO, picture);
 
         return "redirect:product-add";
 
     }
+    @GetMapping(path = "/product-edit", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String editProduct(@ModelAttribute @Valid ProductDTO productDTO,
+                                    @RequestParam("picture") MultipartFile file,
+                                    HttpServletRequest request) throws IOException {
+
+        Picture picture = createPictureFromMultipart(file);
+        request.getSession().removeAttribute("picture");
+
+        this.productService.addProduct(productDTO, picture);
+
+        return "redirect:product-add";
+
+    }
+
+    @GetMapping("/product-owner")
+    public String productList(Model model){
+        ModelMapper modelMapper = new ModelMapper();
+        List<ProductDTO> productDTOList = this.productService.getALlProducts().stream()
+                .map(product -> modelMapper.map(product, ProductDTO.class)).collect(Collectors.toList());
+        if (!model.containsAttribute("products")) {
+            model.addAttribute("products", productDTOList);
+        }
+
+        return "products-owner";
+
+    }
+
+    @GetMapping("/product-edit/{id}")
+    public String productEdit(@PathVariable UUID id, Model model){
+        ModelMapper modelMapper = new ModelMapper();
+        ProductDTO product = modelMapper.map(this.productService.getProductById(id), ProductDTO.class);
+        if (!model.containsAttribute("product")) {
+            model.addAttribute("product", product);
+        }
+
+        return "product-edit";
+
+    }
+
+
 
     private static Picture createPictureFromMultipart(MultipartFile file) throws IOException {
         Picture picture = new Picture();

@@ -147,6 +147,25 @@ label.picture:hover{
     letter-spacing: 2px;
 
 }
+img {
+    position: relative;
+    height: 95px;
+    border: .1rem solid rgba(0, 0, 0, .3);
+    border-radius: .5rem;
+    margin: 8px 60px;
+}
+
+
+label.picture-edit{
+    position: absolute;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 14px 30px;
+    margin: 28px 0px;
+    background: #dddddd;
+    display: inline-block;;
+}
 
 
 @media screen and (max-width: 450px) {

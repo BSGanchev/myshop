@@ -6,7 +6,7 @@ import shop.springbootapp.model.entity.ProductType;
 import java.math.BigDecimal;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestProductDTO {
+public class ProductForOrderDTO {
     String id;
     private String productName;
 
@@ -17,7 +17,7 @@ public class RequestProductDTO {
     private String pictureUrl;
     private String description;
 
-    public RequestProductDTO() {
+    public ProductForOrderDTO() {
     }
 
     public String getId() {

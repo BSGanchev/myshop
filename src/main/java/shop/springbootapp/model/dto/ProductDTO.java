@@ -1,56 +1,58 @@
 package shop.springbootapp.model.dto;
 
-import shop.springbootapp.model.enums.ProductTypeEnum;
+import shop.springbootapp.model.entity.Picture;
 
-import java.math.BigDecimal;
-
+import java.util.UUID;
 
 public class ProductDTO {
-
-    private String id;
-    private String productName;
-
-    private ProductTypeEnum type;
-
-    private BigDecimal price;
-
-    private String pictureUrl;
-
+    private UUID id;
+    private String name;
+    private String type;
+    private String price;
+    private Picture picture;
     private String description;
 
     public ProductDTO() {
     }
 
-    public String getProductName() {
-        return productName;
+    public UUID getId() {
+        return id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    public ProductTypeEnum getType() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
         return type;
     }
 
-    public void setType(ProductTypeEnum type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public Picture getPicture() {
+        return picture;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     public String getDescription() {
@@ -59,13 +61,5 @@ public class ProductDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

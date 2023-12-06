@@ -2,17 +2,15 @@ package shop.springbootapp.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import shop.springbootapp.model.dto.AddProductDTO;
+import shop.springbootapp.model.dto.ProductDTO;
 import shop.springbootapp.model.entity.Picture;
 import shop.springbootapp.model.entity.Product;
 import shop.springbootapp.model.entity.ProductType;
-import shop.springbootapp.model.enums.ProductTypeEnum;
 import shop.springbootapp.repository.ProductRepository;
 import shop.springbootapp.repository.ProductTypeRepository;
 import shop.springbootapp.service.ProductService;
 import shop.springbootapp.service.exception.ProductNotFoundException;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,12 +25,7 @@ public class ProductServiceImpl implements ProductService {
         this.productTypeRepository = productTypeRepository;
     }
 
-    @Override
-    public void initProducts() {
-        if (this.productRepository.count() != 0) {
-            return;
-        }
-    }
+
 
     @Override
     public List<Product> getALlProducts() {
@@ -40,29 +33,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(String id) {
-        if (id == null || id.trim().isBlank()) {
+    public Product getProductById(UUID id) {
+        if (id == null || id.toString().trim().isBlank()) {
             throw new ProductNotFoundException("Product not found");
         }
-        return productRepository.findById(UUID.fromString(id)).orElse(null);
+        return productRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public UUID addProduct(Product product) {
-        ModelMapper modelMapper = new ModelMapper();
-
-        return this.productRepository.save(product).getId();
-    }
 
     @Override
-    public void addProduct(AddProductDTO addProductDTO, Picture picture) {
+    public void addProduct(ProductDTO productDTO, Picture picture) {
         ModelMapper modelMapper = new ModelMapper();
 
-        Product product = modelMapper.map(addProductDTO, Product.class);
+        Product product = modelMapper.map(productDTO, Product.class);
         product.setPicture(picture);
 
         ProductType productType = this.productTypeRepository.findAll().stream()
-                .filter(e -> e.getProductTypeName().name().contains(addProductDTO.getType()))
+                .filter(e -> e.getProductTypeName().name().contains(productDTO.getType()))
                 .findFirst().get();
 
         product.setType(productType);

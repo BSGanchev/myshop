@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
-import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.repository.UserRepository;
 import shop.springbootapp.service.impl.MyUserDetailServiceImpl;
 import shop.springbootapp.util.MyAuthenticationSuccessHandler;

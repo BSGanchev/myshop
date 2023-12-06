@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APofB</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/orders.css">
+
+</head>
+<body>
+<header th:insert="~{fragments/common::header}">
+</header>
+<main class="table">
+    <section class="table-header">
+        <h1>All products</h1>
+    </section>
+    <section class="table-body">
+        <table>
+            <thead>
+            <tr>
+                <th> Product Name </th>
+                <th> Type </th>
+                <th> Price </th>
+                <th> Picture </th>
+                <th> Description </th>
+                <th> Edit </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product :${products}" th:object="${product}" th:value="${product}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{type}"></td>
+                <td th:text="*{price}"></td>
+                <td>
+                    <img th:src="'data:' + ${product.picture.contentType} + ';base64,' + ${product.picture.getEncodedContent()}">
+                </td>
+                <td><strong th:text="*{description}"> </strong></td>
+                <td>
+                    <form th:method="GET" th:action="@{/owner/product-edit/{id}(id=*{id})}">
+                        <input class="btn" type="submit" value="Edit">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<!--<script src="/econt.js"></script>-->
+</body>
+</html>

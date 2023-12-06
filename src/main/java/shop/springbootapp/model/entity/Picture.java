@@ -2,10 +2,8 @@ package shop.springbootapp.model.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 public class Picture extends BaseEntity {
