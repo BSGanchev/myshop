@@ -70,9 +70,6 @@ public class OwnerController {
 
         addProductDTO.getType();
 
-        System.out.println();
-
-
         this.productService.addProduct(addProductDTO, picture);
 
         return "redirect:product-add";

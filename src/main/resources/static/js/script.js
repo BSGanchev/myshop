@@ -23,16 +23,13 @@ if (document.readyState === "loading") {
 } else {
     start();
 }
-
 // start
 function start() {
     handleCart();
     addEvents();
 
 }
-
 // Update and render
-
 function update() {
     addEvents();
     updateTotal();
@@ -82,7 +79,7 @@ function saveCart(){
 }
 function loadCart(){
     let cartJSON = localStorage.getItem("cart");
-    itemsAdded = cartJSON ? JSON.parse(cartJSON) : [];
+    localStorage = cartJSON ? JSON.parse(cartJSON) : [];
 }
 
 
@@ -166,7 +163,6 @@ function getAddBtnId() {
         document.addEventListener('click', function (event) {
             if (event.target.classList.contains('cart-btn')) {
                 const productId = event.target.getAttribute('value');
-                console.log(productId);
 
                 resolve(productId);
                 event.stopPropagation();
@@ -191,9 +187,11 @@ function handle_addCartItem() {
                     return;
                 }
 
-                itemsAdded.push(data);
+                console.log(data);
+
                 saveCart();
-                let cartBoxElement = CartBoxComponent(data.productName, data.price, data.pictureUrl);
+
+                let cartBoxElement = CartBoxComponent(data.productName, data.price, data.picture);
                 let newNode = document.createElement('div');
                 newNode.classList.add('cart-box');
                 newNode.id = 'cart-box';
@@ -236,10 +234,9 @@ function updateTotal() {
 
 // HTML components
 
-function CartBoxComponent(title, price, pictureUrl) {
+function CartBoxComponent(title, price, picture) {
     return `
-            
-                <img src=${pictureUrl} alt="" class="cart-img">
+                <img src= "${'data:' + picture.contentType +';base64,' + picture.encodedContent}" alt="" class="cart-img">
                 <div class="detail-box">
                     <div class="cart-product-title">${title}</div>
                     <div class="cart-price" id="cart-price">${price}</div>
@@ -251,7 +248,6 @@ function CartBoxComponent(title, price, pictureUrl) {
 
 // product page picture change
 let bigImg = document.querySelector('.image img');
-console.log(bigImg.src);
 let smallImage = document.querySelectorAll('.small-images img');
 
 smallImage.forEach(img => {

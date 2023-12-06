@@ -68,11 +68,4 @@ public class Picture extends BaseEntity {
         return Base64.getEncoder().encodeToString(this.content);
     }
 
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(getId(), filename, contentType, filesize, createdDate);
-        result = 31 * result + Arrays.hashCode(content);
-        return result;
-    }
 }
