@@ -36,9 +36,17 @@
             <a th:href="@{/#products}">Products</a>
         </th:block>
         <a th:href="@{/#review}">Review</a>
+        <th:block sec:authorize="hasRole('USER')">
         <a th:href="@{/#contact}">Contact</a>
+        </th:block>
         <th:block sec:authorize="hasRole('OWNER')">
-            <a th:href="@{/owner/orders}">Owner</a>
+            <div class="dropdown">
+                <button class="dropbtn">Owner</button>
+                <div class="dropdown-content">
+                    <a th:href="@{/owner/orders}">Vew orders</a>
+                    <a th:href="@{/owner/product-add}">Add/Edit product</a>
+                </div>
+            </div>
         </th:block>
         <th:block sec:authorize="hasRole('ADMIN')">
             <a th:href="@{/admin/orders}">Admin</a>

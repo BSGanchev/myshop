@@ -168,6 +168,7 @@ main.table {
     margin: .8rem auto;
     border-radius: .6rem;
     overflow: auto;
+
 }
 
 .table-body::-webkit-scrollbar {
@@ -216,6 +217,12 @@ thead th {
     top: 0;
     left: 0;
     background-color: var(--sec-color);
+}
+section.table-header {
+    padding: 4rem 3%;
+}
+section.table-body {
+    padding: 1px 1%;
 }
 
 tbody tr:nth-child(even) {
