@@ -66,6 +66,10 @@ EcontRestClient.request("Nomenclatures/NomenclaturesService.getOffices.json", { 
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
 
+EcontRestClient.request("Nomenclatures/NomenclaturesService.getCities.json", { countryCode: 'BGR' })
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+
 // Validate a simple label
 EcontRestClient.request("Shipments/LabelService.createLabel.json", {
     mode: 'validate',

@@ -6,16 +6,16 @@ import java.util.List;
 
 public class OrderRequestDTO {
     @JsonProperty("items")
-    private List<ProductForOrderDTO> products;
+    private List<RequestProductDTO> products;
 
     public OrderRequestDTO() {
     }
 
-    public List<ProductForOrderDTO> getProducts() {
+    public List<RequestProductDTO> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductForOrderDTO> products) {
+    public void setProducts(List<RequestProductDTO> products) {
         this.products = products;
     }
 }

@@ -13,7 +13,6 @@ import shop.springbootapp.service.exception.ProductNotFoundException;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/products")
@@ -36,7 +35,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable UUID id) {
+    public ResponseEntity<Product> getProductById(@PathVariable String id) {
         Product product = productService.getProductById(id);
 
         if (Objects.isNull(product)) {

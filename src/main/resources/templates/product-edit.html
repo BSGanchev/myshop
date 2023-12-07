@@ -18,13 +18,13 @@
 <header th:insert="~{fragments/common::header}"></header>
 <section class="container">
     <div class="registration-header">Edit Product</div>
-    <form class="form" th:action="@{/owner/product-edit}"
+    <form class="form" th:action="@{'/owner/product-edit/' + ${product.id}}"
           th:object="${product}" th:method="POST"
           enctype="multipart/form-data">
         <div class="column">
             <div class="input-box">
                 <label for="product-name">Product Name</label>
-                <input id="product-name" placeholder="Enter a product-name"  type="text" th:field="*{name}">
+                <input id="product-name" placeholder="Enter a product-name"  type="text" th:field="*{productName}">
             </div>
             <div class="input-box">
                 <label for="price">Price</label>
@@ -36,9 +36,9 @@
             <div class="input-box">
                 <label for="type">Product Type</label>
                 <div>
-                    <Select id="type" name="type" type="text" th:field="*{type}">
+                    <Select id="type" name="type" type="text" th:field="*{type.productTypeName}">
                         <option th:each="t : ${T(shop.springbootapp.model.enums.ProductTypeEnum).values()}"
-                                th:text="${t}" th:value="${t}">Select product type
+                                th:text="${t.toString().replaceAll('_', ' ')}" th:value="${t}">Select product type
                         </option>
                     </Select>
                 </div>

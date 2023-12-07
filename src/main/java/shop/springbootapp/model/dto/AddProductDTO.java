@@ -1,18 +1,20 @@
 package shop.springbootapp.model.dto;
 
-import shop.springbootapp.model.entity.Picture;
-
+import java.math.BigDecimal;
 import java.util.UUID;
 
-public class ProductDTO {
+public class AddProductDTO {
     private UUID id;
-    private String name;
+
+    private String productName;
+
     private String type;
-    private String price;
-    private Picture picture;
+
+    private BigDecimal price;
+
     private String description;
 
-    public ProductDTO() {
+    public AddProductDTO() {
     }
 
     public UUID getId() {
@@ -23,12 +25,12 @@ public class ProductDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getType() {
@@ -39,20 +41,12 @@ public class ProductDTO {
         this.type = type;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Picture getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Picture picture) {
-        this.picture = picture;
     }
 
     public String getDescription() {

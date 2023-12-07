@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import shop.springbootapp.model.dto.OrderRequestDTO;
-import shop.springbootapp.model.dto.ProductForOrderDTO;
+import shop.springbootapp.model.dto.RequestProductDTO;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.Order;
 import shop.springbootapp.model.entity.Product;
@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         }
         order.setTotal(orderRequestDTO.getProducts()
                 .stream()
-                .map(ProductForOrderDTO::getPrice)
+                .map(RequestProductDTO::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         order.setBuyer(buyer);
 

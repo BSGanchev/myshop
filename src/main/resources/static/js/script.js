@@ -75,11 +75,12 @@ function renderCart(){
         })
 }
 function saveCart(){
-    sessionStorage.setItem("cart", JSON.stringify(itemsAdded));
+    localStorage.setItem("cart", JSON.stringify(itemsAdded));
 }
 function loadCart(){
-    let cartJSON = sessionStorage.getItem("cart");
-    sessionStorage = cartJSON ? JSON.parse(cartJSON) : [];
+    let cartJSON = localStorage.getItem("cart");
+    localStorage = cartJSON ? JSON.parse(cartJSON) : [];
+
 }
 
 
@@ -123,7 +124,7 @@ function handle_BuyOrder() {
     itemsAdded = [];
     let total = cart.querySelector('.total-price');
     total.innerHTML = 0.00.toFixed(2);
-    saveCart();
+    localStorage.clear();
     update();
 }
 
@@ -132,7 +133,7 @@ function handle_removeCardItem() {
     itemsAdded = itemsAdded.filter((el) =>
         el.productName !== this.parentElement.querySelector(".cart-product-title")
             .innerHTML);
-
+    saveCart();
     update();
     handleCart();
 
@@ -154,7 +155,9 @@ function handle_removeAll() {
         box.remove();
         total.innerHTML = 0.00.toFixed(2);
     });
-    saveCart();
+    itemsAdded = [];
+    localStorage.setItem('cart', JSON.stringify(itemsAdded));
+
 }
 
 
@@ -194,7 +197,7 @@ function handle_addCartItem() {
                 newNode.innerHTML = cartBoxElement;
                 const cartContent = cart.querySelector('.cart-content');
                 cartContent.appendChild(newNode);
-                saveCart();
+                itemsAdded.push(data);
                 update();
 
             })
@@ -202,7 +205,9 @@ function handle_addCartItem() {
                 console.error('Error fetching product details:', error);
             });
         cart.classList.add("active");
+
         update();
+        console.log(localStorage.length)
 
     });
 
