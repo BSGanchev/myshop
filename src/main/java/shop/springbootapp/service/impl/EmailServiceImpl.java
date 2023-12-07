@@ -12,6 +12,7 @@ import shop.springbootapp.service.EmailService;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -28,6 +29,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendRegistrationEmail(String email, String username, String activationToken) throws MessagingException {
+        if (Objects.isNull(mailPropertyAccess)) {
+            throw new IllegalStateException("mailPropertyAccess is not initialized");
+        }
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);

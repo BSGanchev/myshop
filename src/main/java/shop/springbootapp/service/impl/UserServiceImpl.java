@@ -57,8 +57,6 @@ public class UserServiceImpl implements UserService {
         createUsers();
     }
 
-
-
     @Override
     public void changeLastLoginTime(String name) {
         this.userRepository.setLastLoginTime(name);

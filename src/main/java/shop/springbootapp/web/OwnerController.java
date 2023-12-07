@@ -2,7 +2,6 @@ package shop.springbootapp.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +11,12 @@ import shop.springbootapp.model.dto.AddProductDTO;
 import shop.springbootapp.model.entity.Order;
 import shop.springbootapp.model.entity.Picture;
 import shop.springbootapp.model.entity.Product;
-import shop.springbootapp.repository.PictureRepository;
 import shop.springbootapp.service.OrderService;
 import shop.springbootapp.service.ProductService;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/owner")
@@ -27,8 +24,7 @@ public class OwnerController {
 
     private final OrderService orderService;
     private final ProductService productService;
-    @Autowired
-    PictureRepository pictureRepository;
+
 
     public OwnerController(OrderService orderService, ProductService productService) {
         this.orderService = orderService;

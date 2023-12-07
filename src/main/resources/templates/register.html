@@ -32,8 +32,10 @@
                 <label for="email">Email</label>
                 <input id="email" placeholder="Enter a valid email address" th:field="*{email}"
                        th:errorclass="'is-invalid alert-danger'" type="email">
+                <small th:if="${userExist == true}">
+                    <p class="invalid-feedback">User with this email already exist</p></small>
                 <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback text-danger"></small>
-                <small th:if="${userEmailExist == true}" class="invalid-feedback border-danger">User with tha email already exist</small>
+
             </div>
         </div>
         <div class="column">

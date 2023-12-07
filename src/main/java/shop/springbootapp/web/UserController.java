@@ -15,6 +15,7 @@ import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.service.UserServiceModel;
 import shop.springbootapp.service.UserService;
+import shop.springbootapp.service.exception.UserAlreadyExistException;
 
 import static org.springframework.validation.BindingResult.MODEL_KEY_PREFIX;
 
@@ -28,6 +29,7 @@ public class UserController {
         this.userService = userService;
         this.modelMapper = modelMapper;
     }
+
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
 
@@ -35,13 +37,15 @@ public class UserController {
 
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
+
     @GetMapping("/login")
     public String login() {
 
         return "login";
     }
+
     @PostMapping("/login-error")
-    public String onFailure(@ModelAttribute ("username") String username, Model model) {
+    public String onFailure(@ModelAttribute("username") String username, Model model) {
         model.addAttribute("username", username);
         model.addAttribute("bad_credentials", true);
         return "login";
@@ -56,24 +60,24 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerConfirm(@ModelAttribute("registerUserDTO") @Valid RegisterUserDTO registerUserDTO,
-                                  BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                  HttpServletRequest request) {
+    public String registerConfirm(@ModelAttribute("registerUserDTO") @Valid RegisterUserDTO registerUserDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("registerUserDTO", registerUserDTO);
             redirectAttributes.addFlashAttribute(MODEL_KEY_PREFIX + "registerUserDTO", bindingResult);
 
-            if (this.userService.findByEmail(registerUserDTO.getEmail()) != null) {
-                redirectAttributes.addFlashAttribute("userEmailExist", true);
-                redirectAttributes.addFlashAttribute(MODEL_KEY_PREFIX + "registerUserDTO", bindingResult);
-
-            }
             return "redirect:register";
         }
+        try {
+            this.userService.registerUser(modelMapper.map(registerUserDTO, UserServiceModel.class));
 
-        this.userService.registerUser(modelMapper.map(registerUserDTO, UserServiceModel.class));
+        } catch (UserAlreadyExistException e) {
+            redirectAttributes.addFlashAttribute("userExist", true);
+            redirectAttributes.addFlashAttribute("registerUserDTO", registerUserDTO);
+            redirectAttributes.addFlashAttribute(MODEL_KEY_PREFIX + "registerUserDTO", bindingResult);
 
+            return "redirect:register";
+        }
         return "redirect:login";
     }
 
