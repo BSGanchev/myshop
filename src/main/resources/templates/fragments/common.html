@@ -50,7 +50,12 @@
             </div>
         </th:block>
         <th:block sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/admin/orders}">Admin</a>
+            <div class="dropdown">
+                <button class="dropbtn">Admin</button>
+                <div class="dropdown-content">
+                    <a th:href="@{/admin/view}">Vew</a>
+                </div>
+            </div>
         </th:block>
     </nav>
 

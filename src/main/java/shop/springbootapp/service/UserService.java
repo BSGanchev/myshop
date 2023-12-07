@@ -3,6 +3,7 @@ package shop.springbootapp.service;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.service.UserServiceModel;
+import shop.springbootapp.model.view.AppUserView;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,4 +32,8 @@ public interface UserService {
     AppUser findByEmail(String email);
 
     void deleteUnusedRegistration();
+
+    List<AppUserView> getAllRegistered();
+
+    AppUser findById(String id);
 }

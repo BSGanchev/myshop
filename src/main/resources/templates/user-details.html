@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -13,64 +11,44 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
-    <link href="/css/register.css" rel="stylesheet">
+    <link href="/css/product-add.css" rel="stylesheet">
 </head>
 
 <body>
 <header th:insert="~{fragments/common::header}"></header>
 <section class="container">
-    <div class="registration-header">Registration form</div>
-    <form class="form" th:action="@{/users/register}" th:method="POST" th:object="${}">
-        <div class="column" th:ob>
+    <div class="registration-header">Edit Product</div>
+    <form class="form" th:action="@{'/admin/user-details/' + ${appUser.id}}"
+          th:object="${appUser}" th:method="POST"
+          enctype="multipart/form-data">
+        <div class="column">
             <div class="input-box">
-                <label for="username">Username</label>
-                <input id="username" placeholder="Enter a valid Username" th:field="*{username}"
-                       th:errorclass="'is-invalid alert-danger'" type="text">
-                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback text-danger"></small>
-            </div>
-            <div class="input-box">
-                <label for="email">Email</label>
-                <input id="email" placeholder="Enter a valid email address" th:field="*{email}"
-                       th:errorclass="'is-invalid alert-danger'" type="email">
-                <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback text-danger"></small>
-                <small th:if="${userEmailExist == true}" class="invalid-feedback border-danger">User with tha email already exist</small>
+                <label for="product-name">User Name</label>
+                <input id="product-name" placeholder="Change name"  type="text" th:field="*{username}">
             </div>
         </div>
         <div class="column">
             <div class="input-box">
-                <label for="firstname">First Name</label>
-                <input id="firstname" placeholder="Enter a First Name" th:field="*{firstName}"
-                       th:errorclass="'is-invalid alert-danger'" type="text">
-                <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="invalid-feedback text-danger"></small>
-            </div>
-            <div class="input-box">
-                <label for="lastname">Last Name</label>
-                <input id="lastname" placeholder="Enter a Last Name" th:field="*{lastName}"
-                       th:errorclass="'is-invalid alert-danger'" type="text">
-                <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="invalid-feedback text-danger"></small>
+                <label for="role">Role</label>
+                <div>
+                    <Select id="role" name="role" type="text" th:field="${roles}">
+                        <option th:each="r : ${T(shop.springbootapp.model.enums.RoleNameEnum).values()}"
+                                th:text="${r}" th:value="${r}">Select new Role
+                        </option>
+                    </Select>
+                </div>
             </div>
         </div>
         <div class="column">
             <div class="input-box">
-                <label for="password">Password</label>
-                <input id="password" placeholder="Enter a Password" th:field="*{password}" type="password"
-                       th:errorclass="'is-invalid alert-danger'" >
-                <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback text-danger"></small>            </div>
-            <div class="input-box">
-                <label for="confirmpassword">Confirm password</label>
-                <input id="confirmpassword" placeholder="Password must mach" th:field="*{confirmPassword}"
-                       type="password" th:errorclass="'is-invalid alert-danger'">
-                <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="invalid-feedback text-danger"></small>
+                <label for="lastLogged">Description</label>
+                <input id="lastLogged" placeholder="Describe me"
+                       name="lastLogged" type="text" th:field="*{lastLogged}">
             </div>
         </div>
-        <div class="text-center input-box">
-            <label for="phonenumber">Phone number</label>
-            <input id="phonenumber" placeholder="Enter a phone number" th:field="*{phoneNumber}"
-                   th:errorclass="'is-invalid alert-danger'" type="text">
-            <small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid-feedback text-danger"></small>
-        </div>
-        <button>Register</button>
+        <button>Update</button>
     </form>
+
 </section>
 </body>
 

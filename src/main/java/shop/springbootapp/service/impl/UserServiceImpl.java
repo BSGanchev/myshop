@@ -13,6 +13,7 @@ import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.model.events.UserRegistrationEvent;
 import shop.springbootapp.model.service.UserServiceModel;
+import shop.springbootapp.model.view.AppUserView;
 import shop.springbootapp.repository.RoleRepository;
 import shop.springbootapp.repository.UserRepository;
 import shop.springbootapp.service.UserActivationService;
@@ -21,6 +22,7 @@ import shop.springbootapp.service.exception.UserAlreadyExistException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -140,6 +142,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUnusedRegistration() {
         this.userRepository.deleteUnusedAccounts();
+    }
+
+    @Override
+    public List<AppUserView> getAllRegistered() {
+        return this.userRepository.findAll().stream()
+                .map(appUser -> modelMapper.map(appUser, AppUserView.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public AppUser findById(String id) {
+
+        return this.userRepository.findById(UUID.fromString(id)).orElse(null);
+
     }
 
     private void createUsers() {

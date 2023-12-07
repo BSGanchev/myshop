@@ -7,12 +7,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.view.AppUserView;
 import shop.springbootapp.service.UserService;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -34,20 +36,36 @@ public class AdminController {
 
         List<AppUserView> appUserViews = lastLoggedUsers.stream()
                 .map(appUser -> (modelMapper.map(appUser, AppUserView.class)))
-                .collect(Collectors.toList());
+                .toList();
 
-        model.addAttribute("loggedUsers", appUserViews);
 
-        return "admin-page";
+        List<AppUserView> allAppUsers = this.userService.getAllRegistered();
+        model.addAttribute("allAppUsers", allAppUsers);
+
+        return "admin";
     }
 
     @GetMapping("/api/auth/status")
     public ResponseEntity<String> getAuthStatus() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (authentication != null && authentication.isAuthenticated()) {
             return ResponseEntity.ok("authenticated");
         } else {
             return ResponseEntity.ok("not authenticated");
         }
+    }
+    @GetMapping("/user-details/{id}")
+    public String userDetails(@PathVariable String id, Model model) {
+
+        AppUser appUser = this.userService.findById(id);
+        if (Objects.nonNull(appUser)) {
+
+            List<String> roles = appUser.getRoles().stream().map(role -> role.getRole().name()).collect(Collectors.toList());
+            model.addAttribute("appUser", appUser);
+            model.addAttribute("roles", roles);
+        }
+
+        return "user-details";
     }
 }

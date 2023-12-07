@@ -33,7 +33,7 @@
             <tbody>
             <tr th:each="product :${products}" th:object="${product}" th:value="${product}">
                 <td th:text="*{productName}"></td>
-                <td th:text="*{type}"></td>
+                <td th:text="*{type.productTypeName.name().replaceAll('_',' ')}"></td>
                 <td th:text="*{price}"></td>
                 <td>
                     <img th:src="'data:' + ${product.picture.contentType} + ';base64,' + ${product.picture.getEncodedContent()}">

@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.SecurityFilterChain;
+import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.repository.UserRepository;
 import shop.springbootapp.service.impl.MyUserDetailServiceImpl;
 import shop.springbootapp.util.MyAuthenticationSuccessHandler;
@@ -27,7 +28,7 @@ public class SecurityConfiguration {
 //                                .requestMatchers("/api/orders/**").permitAll()
 //                                .requestMatchers("/", "/users/login", "/users/register", "/users/activation", "/users/login-error").permitAll()
 //                                .requestMatchers("/requestpart/product-add").permitAll()
-//                                .requestMatchers("/admin/**").hasRole(RoleNameEnum.ADMIN.name())
+                                .requestMatchers("/admin/**").hasRole(RoleNameEnum.ADMIN.name())
 
                                 .anyRequest().permitAll()
                 ).formLogin(

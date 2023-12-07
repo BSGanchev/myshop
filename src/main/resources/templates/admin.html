@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/common::head}">
+<head>
   <meta charset="UTF-8">
-  <title>Hello Aleksandra Vancheva!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APofB</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/orders.css">
+
 </head>
 <body>
-<nav th:insert="~{fragments/common::nav}"></nav>
-<table class="products-list">
-  <thead class="products-list-head table">
-  <td class="table-header">Name</td>
-  <td class="table-header">Type</td>
-  <td class="table-header">Picture</td>
-  <td class="table-header">Description</td>
-  <td class="table-header">Price</td>
-  <td class="table-header">Edit</td>
-  </thead>
-  <tbody th:object="${allProducts}">
-  <tr th:each="product : ${allProducts}">
-    <td th:text="${product.productName}"></td>
-    <td th:text="${product.type.productTypeName.name()}"></td>
-    <td>
-      <img class="product-image card-img" th:src="${product.pictureUrl}">
-    </td>
-    <td th:text="${product.description}"></td>
-    <td th:text="${product.price}"></td>
-    <td>
-      <a th:href="@{/owner/edit/{id}(id=${product.id})}">edit</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<footer class="row">
-  <div class="col-12 container-fluid text-right font-weight-light">
-    <p class="d-inline-block tm-bg-black text-white py-2 px-4">
-      &copy; Spring Team 2020
-    </p>
-
-  </div>
-</footer>
+<header th:insert="~{fragments/common::header}"></header>
+<main class="table">
+<section class="table-header">
+  <h1>Admin page</h1>
+</section>
+<section class="table-body">
+  <table>
+    <thead>
+    <tr>
+      <th> Username </th>
+      <th> Role </th>
+      <th> Last logged </th>
+      <th> Edit </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user :${allAppUsers}" th:object="${user}" th:value="${user}">
+      <td th:text="*{username}"><img src="user.png"></td>
+      <td th:each="role : *{roles}" th:text="${role.role.toString()}"></td>
+      <td th:text="*{lastLogged}"></td>
+      <td>
+      <form th:action="@{/admin/user-details/{id}(id=*{id})}">
+        <input class="done-btn" type="submit" value="Edit">
+      </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+</main>
+<!--<script src="/econt.js"></script>-->
 </body>
 </html>
