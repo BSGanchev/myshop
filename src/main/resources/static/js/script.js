@@ -79,7 +79,7 @@ function saveCart(){
 }
 function loadCart(){
     let cartJSON = localStorage.getItem("cart");
-    localStorage = cartJSON ? JSON.parse(cartJSON) : [];
+    itemsAdded = cartJSON ? JSON.parse(cartJSON) : [];
 
 }
 
