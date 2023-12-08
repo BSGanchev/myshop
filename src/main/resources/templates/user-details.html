@@ -41,9 +41,9 @@
             <div class="input-box">
                 <label for="role">Role</label>
                 <div>
-                    <Select id="role" name="role" type="text" th:field="${roles}">
-                        <option th:each="r : ${T(shop.springbootapp.model.enums.RoleNameEnum).values()}"
-                                th:text="${r}" th:value="${r}">Select new Role
+                    <Select for="role" id="role" name="role" type="text">
+                        <option th:each="r : ${roles}"
+                                th:text="${r.name().toString()}" th:value="${r.name().toString()}">Select new Role
                         </option>
                     </Select>
                 </div>

@@ -8,6 +8,7 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import shop.springbootapp.model.dto.EditUserDTO;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.Role;
 import shop.springbootapp.model.entity.UserActivationToken;
@@ -22,8 +23,7 @@ import shop.springbootapp.service.UserService;
 import shop.springbootapp.service.exception.UserAlreadyExistException;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
                            PasswordEncoder passwordEncoder, SessionRegistry sessionRegistry,
                            ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher,
-                           UserActivationService userActivationService) {
+                            UserActivationService userActivationService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -152,12 +152,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserDetail(AppUser oldUser, AppUser appUser) {
-        Role role = appUser.getRoles().stream().findFirst().get();
-        oldUser.getRoles().add(role);
-        oldUser.setId(appUser.getId());
-        oldUser.setUsername(appUser.getUsername());
-        this.userRepository.save(oldUser);
+    public void updateUserDetail(String id, EditUserDTO editUserDTO) {
+        AppUser oldUser = this.userRepository.findById(UUID.fromString(id)).orElse(null);
+
+        if (Objects.nonNull(oldUser)) {
+            oldUser.setId(editUserDTO.getId());
+            oldUser.setUsername(editUserDTO.getUsername());
+            Role role = this.roleRepository.findByRole(RoleNameEnum.valueOf(editUserDTO.getRole())).orElse(null);
+            if (Objects.nonNull(role)) {
+                oldUser.getRoles().add(role);
+            }
+            this.userRepository.save(oldUser);
+        }
     }
 
     private void createUsers() {

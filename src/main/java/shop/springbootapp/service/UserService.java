@@ -1,5 +1,6 @@
 package shop.springbootapp.service;
 
+import shop.springbootapp.model.dto.EditUserDTO;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.service.UserServiceModel;
@@ -37,5 +38,5 @@ public interface UserService {
 
     AppUser findById(String id);
 
-    void updateUserDetail(AppUser oldUser, AppUser appUser);
+    void updateUserDetail(String id, EditUserDTO editUserDTO);
 }

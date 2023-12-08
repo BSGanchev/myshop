@@ -7,7 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import shop.springbootapp.model.dto.EditUserDTO;
 import shop.springbootapp.model.entity.AppUser;
+import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.model.view.AppUserView;
 import shop.springbootapp.service.UserService;
 
@@ -24,6 +26,11 @@ public class AdminController {
     public AdminController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+    }
+
+    @ModelAttribute("roles")
+    public RoleNameEnum[] getRoles() {
+        return RoleNameEnum.values();
     }
 
     @GetMapping("/view")
@@ -59,9 +66,7 @@ public class AdminController {
         AppUser appUser = this.userService.findById(id);
         if (Objects.nonNull(appUser)) {
 
-            List<String> roles = appUser.getRoles().stream().map(role -> role.getRole().name()).collect(Collectors.toList());
             model.addAttribute("appUser", appUser);
-            model.addAttribute("roles", roles);
         }
 
         return "user-details";
@@ -69,10 +74,11 @@ public class AdminController {
 
     @PostMapping("/user-details/{id}")
     public String userDetailsConfirm(@PathVariable String id,
-                                     @ModelAttribute("appUser") AppUser appUser) {
+                                     @ModelAttribute("appUser") EditUserDTO editUserDTO,
+                                     @RequestParam("role") String role) {
 
-        AppUser oldUser = this.userService.findById(id);
-        this.userService.updateUserDetail(oldUser, appUser);
+
+        this.userService.updateUserDetail(id, editUserDTO);
 
         return "redirect:/admin/view";
     }
