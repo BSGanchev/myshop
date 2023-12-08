@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import shop.springbootapp.model.entity.AppUser;
+import shop.springbootapp.model.entity.Role;
 import shop.springbootapp.model.entity.UserActivationToken;
 import shop.springbootapp.model.enums.RoleNameEnum;
 import shop.springbootapp.model.events.UserRegistrationEvent;
@@ -22,7 +23,6 @@ import shop.springbootapp.service.exception.UserAlreadyExistException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -36,7 +36,10 @@ public class UserServiceImpl implements UserService {
     private final ApplicationEventPublisher applicationEventPublisher;
     private final UserActivationService userActivationService;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, SessionRegistry sessionRegistry, ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher, UserActivationService userActivationService) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
+                           PasswordEncoder passwordEncoder, SessionRegistry sessionRegistry,
+                           ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher,
+                           UserActivationService userActivationService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -56,7 +59,7 @@ public class UserServiceImpl implements UserService {
         if (this.userRepository.count() != 0) {
             return;
         }
-        createUsers();
+        this.createUsers();
     }
 
     @Override
@@ -73,23 +76,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<AppUser> getLoggedUsers() {
         List<Object> principals = this.sessionRegistry.getAllPrincipals();
-        return principals.stream()
-                .map(principal -> modelMapper.map(principal, AppUser.class))
-                .toList()
-                .stream().map(appUser -> {
-                    AppUser loggedUser = this.userRepository.findByUsername(appUser.getUsername()).orElse(null);
-                    modelMapper.map(loggedUser, AppUser.class);
-                    return loggedUser;
-                }).collect(Collectors.toList());
+
+        return principals.stream().map(principal -> modelMapper.map(principal, AppUser.class)).toList().stream().map(appUser -> {
+            AppUser loggedUser = this.userRepository.findByUsername(appUser.getUsername()).orElse(null);
+            modelMapper.map(loggedUser, AppUser.class);
+            return loggedUser;
+        }).collect(Collectors.toList());
     }
 
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
 
         if (emailExist(userServiceModel)) {
-            throw new UserAlreadyExistException(
-                    "There is an account with that email address: "
-                            + userServiceModel.getEmail());
+            throw new UserAlreadyExistException("There is an account with that email address: " + userServiceModel.getEmail());
         }
 
         userServiceModel.setPassword(passwordEncoder.encode(userServiceModel.getPassword()));
@@ -111,15 +110,11 @@ public class UserServiceImpl implements UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String name = authentication.getName();
 
-        AppUser appUser = this.userRepository.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("User with name "+ name +" not found!"));
-
-
-        return appUser;
+        return this.userRepository.findByUsername(name).orElseThrow(() -> new UsernameNotFoundException("User with name " + name + " not found!"));
     }
 
     @Override
     public void setUserActive(UUID id) {
-
         this.userRepository.activateUser(id);
     }
 
@@ -146,9 +141,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<AppUserView> getAllRegistered() {
-        return this.userRepository.findAll().stream()
-                .map(appUser -> modelMapper.map(appUser, AppUserView.class))
-                .collect(Collectors.toList());
+        return this.userRepository.findAll().stream().map(appUser -> modelMapper.map(appUser, AppUserView.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -156,6 +149,15 @@ public class UserServiceImpl implements UserService {
 
         return this.userRepository.findById(UUID.fromString(id)).orElse(null);
 
+    }
+
+    @Override
+    public void updateUserDetail(AppUser oldUser, AppUser appUser) {
+        Role role = appUser.getRoles().stream().findFirst().get();
+        oldUser.getRoles().add(role);
+        oldUser.setId(appUser.getId());
+        oldUser.setUsername(appUser.getUsername());
+        this.userRepository.save(oldUser);
     }
 
     private void createUsers() {

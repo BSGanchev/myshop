@@ -36,4 +36,6 @@ public interface UserService {
     List<AppUserView> getAllRegistered();
 
     AppUser findById(String id);
+
+    void updateUserDetail(AppUser oldUser, AppUser appUser);
 }

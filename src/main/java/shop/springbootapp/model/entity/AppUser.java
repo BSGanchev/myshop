@@ -31,7 +31,7 @@ public class AppUser extends BaseEntity {
     private String email;
     @NotBlank
     private String phoneNumber;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

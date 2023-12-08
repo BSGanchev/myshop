@@ -95,6 +95,7 @@ header .navbar a {
 header .navbar a:hover {
     color: var(--pink);
 
+
 }
 header .navbar button {
     font-size: 2rem;
@@ -525,7 +526,7 @@ header .fa-bars {
 
 .footer .box-container .box a:hover {
     color: var(--pink);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .footer .box-container .box img {

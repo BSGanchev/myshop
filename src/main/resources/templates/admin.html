@@ -31,7 +31,9 @@
     <tr th:each="user :${allAppUsers}" th:object="${user}" th:value="${user}">
       <td th:text="*{username}"><img src="user.png"></td>
       <td th:each="role : *{roles}" th:text="${role.role.toString()}"></td>
-      <td th:text="*{lastLogged}"></td>
+      <td th:text="*{lastLogged}">
+        <a>None</a>
+      </td>
       <td>
       <form th:action="@{/admin/user-details/{id}(id=*{id})}">
         <input class="done-btn" type="submit" value="Edit">

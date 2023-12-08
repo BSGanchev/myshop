@@ -17,10 +17,20 @@
 <body>
 <header th:insert="~{fragments/common::header}"></header>
 <section class="container">
-    <div class="registration-header">Edit Product</div>
+    <div class="registration-header" th:text="'Edit User '+ ${appUser.username}"></div>
     <form class="form" th:action="@{'/admin/user-details/' + ${appUser.id}}"
           th:object="${appUser}" th:method="POST"
           enctype="multipart/form-data">
+        <div class="registration-header">
+            <div class="input-box">
+                <th:block th:if="${appUser.lastLogged != null}">
+                    <a th:text="'Last loged :'+ ${appUser.lastLogged}"></a>
+                </th:block>
+                <th:block th:unless="${appUser.lastLogged != null}">
+                    <a th:text="'User ' + ${appUser.username} + ' not loggin in yet'"></a>
+                </th:block>
+            </div>
+        </div>
         <div class="column">
             <div class="input-box">
                 <label for="product-name">User Name</label>
@@ -37,13 +47,6 @@
                         </option>
                     </Select>
                 </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="input-box">
-                <label for="lastLogged">Description</label>
-                <input id="lastLogged" placeholder="Describe me"
-                       name="lastLogged" type="text" th:field="*{lastLogged}">
             </div>
         </div>
         <button>Update</button>
