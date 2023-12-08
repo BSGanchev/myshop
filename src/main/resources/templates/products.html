@@ -22,21 +22,21 @@
 <section class="products" id="products">
   <!-- heading -->
   <h1 class="heading">All <span>products</span></h1>
-  <div class="box-container">
+  <div class="box-container" th:each="product : ${allProducts}">
     <div class="box">
       <span class="discount"></span>
       <!-- main image with add to cart-->
       <div class="image">
-        <img src="4.jpg" alt="">
+        <img th:src="'data:' + ${product.picture.contentType} + ';base64,' + ${product.picture.getEncodedContent()}" alt="">
         <div class="icons">
           <a href="#" class="fas fa-heart"></a>
-          <a href="#" class="cart-btn" id="add-to-cart" th:value="*{id}">add to cart</a>
+          <a href="#" class="cart-btn" id="add-to-cart" th:value="*{product.id}">add to cart</a>
           <a href="#" class="fas fa-share"></a>
         </div>
       </div>
       <div class="content">
-        <h3>Christmas ball</h3>
-        <div class="price">BGN 12.99 <span>BGN 15.00</span></div>
+        <h3 th:text="*{product.type.productTypeName.name()}">No category</h3>
+        <div class="price" th:text="*{product.price}">BGN none <span th:text="*{product.price*0.85}">BGN none</span></div>
       </div>
       <!-- small images -->
 
@@ -58,7 +58,7 @@
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos laborum,
+            <p th:text="*{product.description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos laborum,
               recusandae
               necessitatibus culpa quia sunt saepe fugiat porro est possimus dolores omnis facere
               dicta
