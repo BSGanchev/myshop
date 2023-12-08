@@ -39,4 +39,6 @@ public interface UserService {
     AppUser findById(String id);
 
     void updateUserDetail(String id, EditUserDTO editUserDTO);
+
+    void removeRoleFromUser(String userId, String roleId);
 }

@@ -1,6 +1,7 @@
 package shop.springbootapp.web;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -79,6 +80,17 @@ public class AdminController {
 
 
         this.userService.updateUserDetail(id, editUserDTO);
+
+        return "redirect:/admin/view";
+    }
+    @PostMapping("/remove-role-from-user/{userid}/{roleid}")
+    public String removeRole(@PathVariable("userid") String userId,
+                             @PathVariable("roleid") String roleId) {
+
+        System.out.println(userId);
+        System.out.println(roleId);
+
+        this.userService.removeRoleFromUser(userId, roleId);
 
         return "redirect:/admin/view";
     }

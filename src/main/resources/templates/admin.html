@@ -2,47 +2,56 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APofB</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APofB</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="/css/index.css">
-  <link rel="stylesheet" href="/css/orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/orders.css">
 
 </head>
 <body>
 <header th:insert="~{fragments/common::header}"></header>
 <main class="table">
-<section class="table-header">
-  <h1>Admin page</h1>
-</section>
-<section class="table-body">
-  <table>
-    <thead>
-    <tr>
-      <th> Username </th>
-      <th> Role </th>
-      <th> Last logged </th>
-      <th> Edit </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user :${allAppUsers}" th:object="${user}" th:value="${user}">
-      <td th:text="*{username}"><img src="user.png"></td>
-      <td th:each="role : *{roles}" th:text="${role.role.toString()}"></td>
-      <td th:text="*{lastLogged}">
-        <a>None</a>
-      </td>
-      <td>
-      <form th:action="@{/admin/user-details/{id}(id=*{id})}">
-        <input class="done-btn" type="submit" value="Edit">
-      </form>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</section>
+    <section class="table-header">
+        <h1>Admin page</h1>
+    </section>
+    <section class="table-body">
+        <table>
+            <thead>
+            <tr>
+                <th> Username</th>
+                <th> Role</th>
+                <th> Last logged</th>
+                <th> Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user :${allAppUsers}" th:object="${user}" th:value="${user}">
+                <td th:text="*{username}"><img src="user.png"></td>
+                <td>
+                    <div th:each="role : *{roles}">
+                        <br>
+
+                        <span th:text="${role.role.name()}" th:value="${role}"></span>
+                        <form th:method="POST"  th:action="@{'/admin/remove-role-from-user/' + ${user.id} + '/' + ${role.id}}" >
+                            <input class="btn-danger" type="submit" value="remove">
+                        </form>
+                    </div>
+                </td>
+                <td th:text="*{lastLogged}">
+                    <a>None</a>
+                </td>
+                <td>
+                    <form th:action="@{/admin/user-details/{id}(id=*{id})}">
+                        <input class="done-btn" type="submit" value="Edit">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 </main>
 <!--<script src="/econt.js"></script>-->
 </body>

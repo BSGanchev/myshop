@@ -212,6 +212,13 @@ table, th, td {
     font-size: 10px;
     font-weight: 400;
 }
+.users-role {
+    ext-align: left;
+    font-size: 10px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+}
 thead th {
     position: sticky;
     top: 0;

@@ -2,12 +2,14 @@ package shop.springbootapp.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import shop.springbootapp.model.dto.EditUserDTO;
 import shop.springbootapp.model.entity.AppUser;
 import shop.springbootapp.model.entity.Role;
@@ -163,6 +165,22 @@ public class UserServiceImpl implements UserService {
                 oldUser.getRoles().add(role);
             }
             this.userRepository.save(oldUser);
+        }
+    }
+
+    @Override
+    @Modifying
+    @Transactional
+    public void removeRoleFromUser(String userId, String roleId) {
+        AppUser appUser = this.userRepository.findById(UUID.fromString(userId)).orElse(null);
+        if(Objects.nonNull(appUser)) {
+            Role role = appUser.getRoles().stream().filter(r -> r.getId().equals(UUID.fromString(roleId))).findFirst().get();
+
+            Set<Role> newRoles = appUser.getRoles();
+            newRoles.remove(role);
+            appUser.setRoles(newRoles);
+
+            this.userRepository.save(appUser);
         }
     }
 
