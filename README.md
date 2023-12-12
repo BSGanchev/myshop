@@ -1,6 +1,6 @@
 # myshop
 Simple Java Spring project
-e-comerce for hand made accessories
+e-commerce for hand made accessories
 
 username : admin
 pass : test
